@@ -1,6 +1,6 @@
-# Dan Salerno
+# Dan Salerno, Jennifer Cafiero, Brianne Trollo, Derek Pulaski
 # CS 555
-# Project 2
+# Project 3
 
 import sys
 from Family import Family
