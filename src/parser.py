@@ -81,31 +81,3 @@ def parse(path):
 
     return (individuals, families)
 
-
-def main():
-    ''' Parses the GEDCOM file from the input and stores the Individuals and Families'''
-    # check for correct inputs
-    if len(sys.argv) != 2:
-        print("Usage: python parser.py <file_path>")
-        return
-
-    path = sys.argv[1]
-
-    individuals, families = parse(path)
-
-    # for project 3, print individuals and families in order
-    individuals.sort(key=lambda x: x.ID)
-    families.sort(key=lambda x: x.ID)
-
-    print("=============Individuals==============")
-    for indi in individuals:
-        print("ID: " + indi.ID + "\tName: " + indi.name)
-
-    print("=============Families==============")
-    for fam in families:
-        print("ID: " + fam.ID + "\tHusband Name: " +
-              fam.husband_name + "\tWife Name: " + fam.wife_name)
-
-
-if __name__ == '__main__':
-    main()
