@@ -24,7 +24,7 @@ class TestUS22(unittest.TestCase):
     def test_unique_IDs_all_good(self):
         # remove the duplicate individuals and families
         self.individuals[0].ID = "@I1@"
-        self.families[0].ID = "@F1@"
+        self.families[1].ID = "@F2@"
         result, output = Checks.unique_IDs(self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(output, "All IDs are unique")
@@ -35,8 +35,8 @@ class TestUS22(unittest.TestCase):
         self.assertEqual(
             output, "Error: " + str(self.individuals[0]) + " has a non-unique ID\n" +
             "Error: " + str(self.individuals[1]) + " has a non-unique ID\n" +
-            "Error: " + str(self.families[0]) + " has a non-unique ID\n" +
-            "Error: " + str(self.families[1]) + " has a non-unique ID\n")
+            "Error: " + str(self.families[1]) + " has a non-unique ID\n" +
+            "Error: " + str(self.families[2]) + " has a non-unique ID\n")
 
 
 if __name__ == '__main__':
