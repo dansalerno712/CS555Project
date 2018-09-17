@@ -22,19 +22,21 @@ class TestUS22(unittest.TestCase):
 
     # all tests need to be names test_<name_of_function>
     def test_unique_IDs_all_good(self):
+        # remove the duplicate individuals and families
+        self.individuals[0].ID = "@I1@"
+        self.families[0].ID = "@F1@"
         result, output = Checks.unique_IDs(self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(output, "All IDs are unique")
 
-    def test_unique_IDs_bad_individuals(self):
-        # make a duplicate individual ID
-        self.individuals[0].ID = "@I2@"
+    def test_unique_IDs_bad_individuals_and_families(self):
         result, output = Checks.unique_IDs(self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
-            output, "Error: Dan /Salerno/ (ID: @I2@) has a non-unique ID\n")
-        # put it back
-        self.individuals[0].ID = "@I1@"
+            output, "Error: " + str(self.individuals[0]) + " has a non-unique ID\n" +
+            "Error: " + str(self.individuals[1]) + " has a non-unique ID\n" +
+            "Error: " + str(self.families[0]) + " has a non-unique ID\n" +
+            "Error: " + str(self.families[1]) + " has a non-unique ID\n")
 
 
 if __name__ == '__main__':

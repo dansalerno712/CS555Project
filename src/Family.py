@@ -50,3 +50,13 @@ class Family(object):
                     # skip a line to get the actual date
                     level, tag, args, valid = parse_line(tag_list[i + 1])
                     self.divorced = args
+
+    def __str__(self):
+        return "{ID: " + str(self.ID) + \
+            "| Married: " + str(self.married) + \
+            "| Divorced: " + str(self.divorced) + \
+            "| Husband ID: " + str(self.husband_ID) + \
+            "| Husband Name: " + str(self.husband_name) + \
+            "| Wife ID: " + str(self.wife_ID) + \
+            "| Wife Name: " + str(self.wife_name) + \
+            "| Children: " + str(self.children) + "}"
