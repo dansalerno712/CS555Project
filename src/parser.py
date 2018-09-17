@@ -8,15 +8,16 @@ from Individual import Individual
 from Utils import parse_line
 
 
-def main():
-    ''' Parses the GEDCOM file from the input and stores the Individuals and Families'''
-    # check for correct inputs
-    if len(sys.argv) != 2:
-        print("Usage: python parser.py <file_path>")
-        return
+def parse(path):
+    """Parses a GEDCOM file and returns all individuals and families
 
-    path = sys.argv[1]
+    Args:
+        path (string): Path to the GEDCOM file
 
+    Returns:
+        tuple: A tuple in the form (individuals, families) where all individuals and
+        families are parsed into their respective objects and stored in an array
+    """
     # get the info from the gedcom file
     with open(path, 'r') as file:
         lines = [line.rstrip() for line in file]
@@ -77,6 +78,20 @@ def main():
             fam.husband_name = husband[0].name
 
         families.append(fam)
+
+    return (individuals, families)
+
+
+def main():
+    ''' Parses the GEDCOM file from the input and stores the Individuals and Families'''
+    # check for correct inputs
+    if len(sys.argv) != 2:
+        print("Usage: python parser.py <file_path>")
+        return
+
+    path = sys.argv[1]
+
+    individuals, families = parse(path)
 
     # for project 3, print individuals and families in order
     individuals.sort(key=lambda x: x.ID)
