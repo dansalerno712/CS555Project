@@ -59,3 +59,14 @@ class Individual(object):
             self.age = calculate_age(self.birthday)
         else:
             self.age = None
+
+    def __str__(self):
+        return "{ID: " + str(self.ID) + \
+            "| Name: " + str(self.name) + \
+            "| Gender: " + str(self.gender) + \
+            "| Birthday: " + str(self.birthday) + \
+            "| Age: " + str(self.age) + \
+            "| Alive: " + str(self.alive) + \
+            "| Death: " + str(self.death) + \
+            "| Child: " + str(self.child) + \
+            "| Spouse: " + str(self.spouse) + "}"

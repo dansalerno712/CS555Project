@@ -35,12 +35,15 @@ def unique_IDs(individuals, families):
 
         # generate error messages
         for ID in duplicate_indi_IDs:
-            indi = [indi for indi in individuals if indi.ID == ID][0]
+            duplicated_indis = [indi for indi in individuals if indi.ID == ID]
 
-            output += "Error: " + indi.name + \
-                " (ID: " + ID + ") has a non-unique ID\n"
+            for indi in duplicated_indis:
+                output += "Error: " + str(indi) + " has a non-unique ID\n"
 
         for ID in duplicate_fam_IDs:
-            output += "Error: Family with ID " + ID + " has a non-unique ID\n"
+            duplicated_fams = [fam for fam in families if fam.ID == ID]
+
+            for fam in duplicated_fams:
+                output += "Error: " + str(fam) + " has a non-unique ID\n"
 
         return (False, output)
