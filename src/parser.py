@@ -80,4 +80,3 @@ def parse(path):
         families.append(fam)
 
     return (individuals, families)
-
