@@ -1,0 +1,46 @@
+# This file stores all the various checks for Errors and Anomalies
+from collections import Counter
+
+
+def unique_IDs(individuals, families):
+    """US 22
+    Checks to make sure all individual IDs are unique and all
+    family IDs are unique
+
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all IDs are unique, this returns
+        (True, "All IDs are unique"). If the IDs are not all unique, this returns
+        (False, <a string to output that lists errors>)
+    """
+
+    # pull the IDs from the individuals and families
+    indi_IDs = [indi.ID for indi in individuals]
+    fam_IDs = [fam.ID for fam in families]
+
+    # get a list of the duplicate IDs
+    duplicate_indi_IDs = [ID for ID, count in Counter(
+        indi_IDs).items() if count > 1]
+    duplicate_fam_IDs = [ID for ID, count in Counter(
+        fam_IDs).items() if count > 1]
+
+    # if both duplicate lists are empty then everything is unique
+    if len(duplicate_indi_IDs) == 0 and len(duplicate_fam_IDs) == 0:
+        return (True, "All IDs are unique")
+    else:
+        output = ""
+
+        # generate error messages
+        for ID in duplicate_indi_IDs:
+            indi = [indi for indi in individuals if indi.ID == ID][0]
+
+            output += "Error: " + indi.name + \
+                " (ID: " + ID + ") has a non-unique ID\n"
+
+        for ID in duplicate_fam_IDs:
+            output += "Error: Family with ID " + ID + " has a non-unique ID\n"
+
+        return (False, output)
