@@ -9,7 +9,7 @@ in the `src` directory
 
 To run a specific unittest, type
 ```bash
-python <your unit test file>
+python <your unit test file> -v
 ```
 in the `tests` directory
 
