@@ -2,7 +2,6 @@
 # CS 555
 # Project 3
 
-import sys
 from Family import Family
 from Individual import Individual
 from Utils import parse_line
