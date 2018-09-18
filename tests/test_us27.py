@@ -23,7 +23,7 @@ class TestUS27(unittest.TestCase):
         # since this is time dependent I'm hard coding my age here to compare to
         self.dans_age = 22
 
-    # all tests need to be names test_<name_of_function>
+    # all tests need to be named test_<name_of_function>
     def test_age_calculation(self):
         self.assertEqual(calculate_age("12 JUL 1996"), self.dans_age)
 
