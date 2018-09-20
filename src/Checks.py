@@ -1,6 +1,6 @@
 # This file stores all the various checks for Errors and Anomalies
 from collections import Counter
-
+from datetime import datetime
 
 def unique_IDs(individuals, families):
     """US 22
@@ -47,3 +47,17 @@ def unique_IDs(individuals, families):
                 output += "Error: " + str(fam) + " has a non-unique ID\n"
 
         return (False, output)
+
+def marriage_before_divorce(families):
+    flag = True
+    output = ""
+    for family in families:
+        if family.divorced != None:
+            married_date = datetime.strptime(family.married, '%d %b %Y')
+            divorced_date = datetime.strptime(family.divorced, '%d %b %Y')
+            if married_date > divorced_date:
+                flag = False
+                output += "Error: " + str(family) + " has a divorce before a marriage\n"
+    if flag:
+        output += "All families are married before they are divorced\n"
+    return (flag, output)

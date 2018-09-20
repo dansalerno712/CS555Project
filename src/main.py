@@ -31,6 +31,9 @@ def main():
     print("User Story 22: Unique IDs")
     result, output = Checks.unique_IDs(individuals, families)
     print(output)
+    print("User Story 04: Marriage Before Divorce")
+    result, output = Checks.marriage_before_divorce(families)
+    print(output)
 
 
 if __name__ == '__main__':
