@@ -34,6 +34,9 @@ def main():
     print("User Story 04: Marriage Before Divorce")
     result, output = Checks.marriage_before_divorce(families)
     print(output)
+    print("User Story 01: Dates Before Current Date")
+    result, output = Checks.dates_before_current_date(individuals, families)
+    print(output)
 
 
 if __name__ == '__main__':

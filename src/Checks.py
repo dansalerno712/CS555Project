@@ -61,3 +61,45 @@ def marriage_before_divorce(families):
     if flag:
         output += "All families are married before they are divorced\n"
     return (flag, output)
+
+def dates_before_current_date(individuals, families):
+    """
+    US01
+    Checks all dates are before the current date
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all IDs are unique, this returns
+        (True, "All IDs are unique"). If the IDs are not all unique, this returns
+        (False, <a string to output that lists errors>)
+    """
+    flag = True
+    output = ""
+    curr = datetime.now()
+    for individual in individuals:
+        birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+        if birth_date > curr:
+            flag = False
+            output += "Error: " + str(indvidual) + " has a birth after current date.\n"
+        if individual.death != None:
+            death_date = datetime.strptime(individual.death, '%d %b %Y')
+            if death_date > curr:
+                flag = False
+                output += "Error: " + str(indvidual) + " has a death after current date.\n"
+    for family in families:
+        married_date = datetime.strptime(family.married, '%d %b %Y')
+        if married_date > curr:
+            flag = False
+            output += "Error: " + str(family) + " has a marriage after current date.\n"
+        if family.divorced != None:
+            divorced_date = datetime.strptime(family.divorced, '%d %b %Y')
+            if divorced_date > curr:
+                flag = False
+                output += "Error: " + str(family) + " has a divorce after current date.\n"
+    if flag:
+        output += "All dates are after current date.\n"
+    return (flag, output)
+        
+                
