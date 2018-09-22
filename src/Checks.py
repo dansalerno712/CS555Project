@@ -82,12 +82,12 @@ def dates_before_current_date(individuals, families):
         birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
         if birth_date > curr:
             flag = False
-            output += "Error: " + str(indvidual) + " has a birth after current date.\n"
+            output += "Error: " + str(individual) + " has a birth after current date.\n"
         if individual.death != None:
             death_date = datetime.strptime(individual.death, '%d %b %Y')
             if death_date > curr:
                 flag = False
-                output += "Error: " + str(indvidual) + " has a death after current date.\n"
+                output += "Error: " + str(individual) + " has a death after current date.\n"
     for family in families:
         married_date = datetime.strptime(family.married, '%d %b %Y')
         if married_date > curr:
@@ -99,7 +99,7 @@ def dates_before_current_date(individuals, families):
                 flag = False
                 output += "Error: " + str(family) + " has a divorce after current date.\n"
     if flag:
-        output += "All dates are after current date.\n"
+        output += "All dates are after current date."
     return (flag, output)
         
                 
