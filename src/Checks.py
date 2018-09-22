@@ -61,3 +61,61 @@ def marriage_before_divorce(families):
     if flag:
         output += "All families are married before they are divorced\n"
     return (flag, output)
+
+def no_bigamy(individuals, families):
+    flag = True
+    output = ""
+    posCheaters = [ind for ind in individuals if len(ind.spouse) > 1]
+    for pc in posCheaters:
+        spouses = pc.spouse
+        timelines = []
+        for f in spouses
+            wife = next(x for x in individuals if x.ID == f.wife)
+            husband = next(x for x in individuals if x.ID == f.husband)
+            married_date = datetime.strptime(f.married, '%d %b %Y')
+            if f.divorced !=None:
+                output+= "divorce"
+                divorced_date = datetime.strptime(f.divorced, '%d %b %Y')
+                timelines.append([married_date, divorced_date])
+            elif i.gender == 'M' and  wife.death:
+                death_date = datetime.strptime(wife.death, '%d %b %Y')
+                timelines.append([married_date, wife.death])
+            elif i.gender == 'F' and husband.death:
+                death_date = datetime.strptime(husband.death, '%d %b %Y')
+                timelines.append([married_date, husband.death])
+            else:
+                continue
+        
+    # for i in individuals:
+    #     spouses = i.spouse
+    #     indID = i.ID
+    #     if len(spouses) > 1:
+    #         output+= str(i) + "\n"
+    #         fams = [fam for fam in families if fam.ID in spouses]
+    #         timelines = []
+    #         for f in fams:
+    #             married_date = datetime.strptime(f.married, '%d %b %Y')
+    #             if f.divorced !=None:
+    #                 output+= "divorce"
+    #                 divorced_date = datetime.strptime(f.divorced, '%d %b %Y')
+    #                 timelines.append([married_date, divorced_date])
+    #             elif i.gender == 'M':
+    #                 wife = next(x for x in individuals if x.ID == f.wife)
+    #                 if wife.death:
+    #                     timelines.append([married_date, wife.death])
+    #             elif i.gender == 'F':
+    #                 print("hekko")
+    #                 husband = next(x for x in individuals if x.ID == f.husband)
+    #                 if husband.death:
+    #                     timelines.append([married_date, husband.death])
+    #             else:
+    #                 continue
+            # for t in timelines:
+                # output+= str(timelines) + "\n"
+    flag = False
+    output+= "Error: " + str(posCheaters[0]) + " is married to multiple people\n"
+    return (flag, output)
+
+
+
+ 
