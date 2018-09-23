@@ -37,6 +37,9 @@ def main():
     print("User Story 01: Dates Before Current Date")
     result, output = Checks.dates_before_current_date(individuals, families)
     print(output)
+    print("User Story 09: Birth Before the Death of Parents")
+    result, output = Checks.birth_before_parents_death(individuals, families)
+    print(output)
 
 
 if __name__ == '__main__':

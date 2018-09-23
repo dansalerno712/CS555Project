@@ -1,6 +1,7 @@
 # This file stores all the various checks for Errors and Anomalies
 from collections import Counter
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 def unique_IDs(individuals, families):
     """US 22
@@ -101,5 +102,33 @@ def dates_before_current_date(individuals, families):
     if flag:
         output += "All dates are after current date."
     return (flag, output)
-        
-                
+
+def birth_before_parents_death(individuals, families):
+    flag = True
+    output = ""
+    mom_death = None
+    dad_death = None
+    for family in families:
+        children = {}
+        for individual in individuals:
+            if individual.ID == family.wife_ID:
+                if individual.death != None:
+                    mom_death = datetime.strptime(individual.death, '%d %b %Y')
+            elif individual.ID == family.husband_ID:
+                if individual.death != None:
+                    dad_death = datetime.strptime(individual.death, '%d %b %Y')
+            else:
+                if individual.ID in family.children:
+                    children[individual.ID] = individual
+        for c in children:
+            child = children[c]
+            child_birthday = datetime.strptime(child.birthday, '%d %b %Y')
+            if mom_death != None and child_birthday > mom_death:
+                flag = False
+                output += "Error: " + str(family) + " has a child " + str(child.ID) + " born after the mother's death.\n"
+            if dad_death != None and child_birthday > (dad_death + relativedelta(months = 9)):
+                flag = False
+                output += "Error: " + str(family) + " has a child " + str(child.ID) + " born more than 9 months after the father's death.\n"
+    if flag:
+        output += "All children are born before the death of the mother or within nine months of the death of the father."
+    return (flag, output)
