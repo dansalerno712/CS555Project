@@ -37,6 +37,9 @@ def main():
     print("User Story 01: Dates Before Current Date")
     result, output = Checks.dates_before_current_date(individuals, families)
     print(output)
+    print("User Story 25: Unique First Names in Families")
+    result, output = Checks.unique_first_names(individuals, families)
+    print(output)
 
 
 if __name__ == '__main__':
