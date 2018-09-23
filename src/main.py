@@ -39,6 +39,8 @@ def main():
     print(output)
     print("User Story 09: Birth Before the Death of Parents")
     result, output = Checks.birth_before_parents_death(individuals, families)
+    print("User Story 25: Unique First Names in Families")
+    result, output = Checks.unique_first_names(individuals, families)
     print(output)
 
 

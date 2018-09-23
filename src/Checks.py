@@ -72,8 +72,8 @@ def dates_before_current_date(individuals, families):
         families (list): List of Family objects
 
     Returns:
-        tuple: Tuple in the form (result, output). If all IDs are unique, this returns
-        (True, "All IDs are unique"). If the IDs are not all unique, this returns
+        tuple: Tuple in the form (result, output). If all dates are before current date, this returns
+        (True, "All dates are after current date."). If the dates are not all before current date, this returns
         (False, <a string to output that lists errors>)
     """
     flag = True
@@ -131,4 +131,41 @@ def birth_before_parents_death(individuals, families):
                 output += "Error: " + str(family) + " has a child " + str(child.ID) + " born more than 9 months after the father's death.\n"
     if flag:
         output += "All children are born before the death of the mother or within nine months of the death of the father."
+    return (flag, output)
+    
+def unique_first_names(individuals, families):
+    """
+    US25
+    Checks that no more than one child with the same name and birth date should appear in a family
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all first names in families are unique, this returns
+        (True, "All first names are unique"). If the first names are not all unique, this returns
+        (False, <a string to output that lists errors>)
+    """
+    flag = True
+    output = ""
+    for family in families:
+        if family.children == []:
+            break
+        else:
+            children = {}
+            for child in family.children:
+                for individual in individuals:
+                    if individual.ID == child:
+                        if individual.name in children and children[individual.name][0] == individual.birthday:
+                            flag = False
+                            children[individual.name][1] += [str(individual)]
+                        else:
+                            children[individual.name] = [individual.birthday, [str(individual)]]
+                    else:
+                        continue
+            for key in children.keys():
+                if len(children[key][1]) > 1:
+                    output += "Error: " + str(family) + " has children, ".join(children[key][1]) + ", with the same first name and birthday.\n"
+    if flag:
+        output += "All children in the all families do not have the same names and birth dates."
     return (flag, output)
