@@ -65,55 +65,49 @@ def marriage_before_divorce(families):
 def no_bigamy(individuals, families):
     flag = True
     output = ""
-    posCheaters = [ind for ind in individuals if len(ind.spouse) > 1]
-    for pc in posCheaters:
-        spouses = pc.spouse
-        timelines = []
-        for f in spouses
-            wife = next(x for x in individuals if x.ID == f.wife)
-            husband = next(x for x in individuals if x.ID == f.husband)
-            married_date = datetime.strptime(f.married, '%d %b %Y')
-            if f.divorced !=None:
-                output+= "divorce"
-                divorced_date = datetime.strptime(f.divorced, '%d %b %Y')
-                timelines.append([married_date, divorced_date])
-            elif i.gender == 'M' and  wife.death:
-                death_date = datetime.strptime(wife.death, '%d %b %Y')
-                timelines.append([married_date, wife.death])
-            elif i.gender == 'F' and husband.death:
-                death_date = datetime.strptime(husband.death, '%d %b %Y')
-                timelines.append([married_date, husband.death])
-            else:
+    #Go through the familes
+    for f in families:
+        wife = next(x for x in individuals if x.ID == f.wife_ID)
+        husband = next(x for x in individuals if x.ID == f.husband_ID)
+        fMar = datetime.strptime(f.married, '%d %b %Y')
+        #Compare families
+        for f2 in families:
+            #Dont compare to itself
+            if(f == f2):
                 continue
-        
-    # for i in individuals:
-    #     spouses = i.spouse
-    #     indID = i.ID
-    #     if len(spouses) > 1:
-    #         output+= str(i) + "\n"
-    #         fams = [fam for fam in families if fam.ID in spouses]
-    #         timelines = []
-    #         for f in fams:
-    #             married_date = datetime.strptime(f.married, '%d %b %Y')
-    #             if f.divorced !=None:
-    #                 output+= "divorce"
-    #                 divorced_date = datetime.strptime(f.divorced, '%d %b %Y')
-    #                 timelines.append([married_date, divorced_date])
-    #             elif i.gender == 'M':
-    #                 wife = next(x for x in individuals if x.ID == f.wife)
-    #                 if wife.death:
-    #                     timelines.append([married_date, wife.death])
-    #             elif i.gender == 'F':
-    #                 print("hekko")
-    #                 husband = next(x for x in individuals if x.ID == f.husband)
-    #                 if husband.death:
-    #                     timelines.append([married_date, husband.death])
-    #             else:
-    #                 continue
-            # for t in timelines:
-                # output+= str(timelines) + "\n"
-    flag = False
-    output+= "Error: " + str(posCheaters[0]) + " is married to multiple people\n"
+            f2Mar = datetime.strptime(f2.married, '%d %b %Y')
+            #Make sure second marriage happend after original
+            if(f2Mar > fMar):
+                #Checks if wife
+                if(wife.ID == f2.wife_ID):
+                    #Spouse is alive and family is not divorced
+                    if husband.alive and f.divorced is None:
+                        flag = False
+                        output+= "Error: " + str(wife) + " is/was married to multiple people at the same time\n"
+                    #If family is divorced check if divorce happened before second marriage
+                    elif f.divorced != None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'):
+                        flag = False
+                        output+= "Error: " + str(wife) + " is/was married to multiple people at the same time\n"
+                    #If spouse is dead check if death happened before second marriage
+                    elif((husband.death != None and f2Mar < datetime.strptime(husband.death, '%d %b %Y'))):
+                        flag = False
+                        output+= "Error: " + str(wife) + " is/was married to multiple people at the same time\n"
+                #Check if husband
+                if(husband.ID == f2.husband_ID):
+                    #Spouse is alive and family is not divorced
+                    if husband.alive and f.divorced is None:
+                        flag = False
+                        output+= "Error: " + str(husband) + " is/was married to multiple people at the same time\n"
+                    #If family is divorced check if divorce happened before second marriage
+                    elif((f.divorced!= None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'))):
+                        flag = False
+                        output+= "Error: " + str(husband) + " is/was married to multiple people at the same time\n"
+                    #If spouse is dead check if death happened before second marriage
+                    elif((wife.death != None and f2Mar < datetime.strptime(wife.death, '%d %b %Y'))):
+                        flag = False
+                        output+= "Error: " + str(husband) + " is/was married to multiple people at the same time\n"
+    if flag:
+        output += "No one is practicing polygamy\n"
     return (flag, output)
 
 
