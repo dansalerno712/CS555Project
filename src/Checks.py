@@ -50,6 +50,17 @@ def unique_IDs(individuals, families):
         return (False, output)
 
 def marriage_before_divorce(families):
+    """US 04
+    Checks to make sure that a marriage occurs before a divorce
+
+    Args:
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all divorces exist after a marriage,
+        this returns (True, "All families are married before they are divorced\n"). If the divorces
+        are not all preceeded by a marriage, this returns (False, <a string to output that lists errors>).
+    """
     flag = True
     output = ""
     for family in families:
@@ -104,6 +115,20 @@ def dates_before_current_date(individuals, families):
     return (flag, output)
 
 def birth_before_parents_death(individuals, families):
+    """
+    US09
+    Checks to make sure that a child's birth occurs before the parents' deaths
+
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all births occur before parents' deaths, this returns
+        (True, "All children are born before the death of the mother or within nine months of the death of the father.")
+        If the children are born after the death of the mother or more than nine months after the death of the father,
+        this returns (False, <a string to output that lists errors>).
+    """
     flag = True
     output = ""
     mom_death = None
@@ -132,7 +157,7 @@ def birth_before_parents_death(individuals, families):
     if flag:
         output += "All children are born before the death of the mother or within nine months of the death of the father."
     return (flag, output)
-    
+
 def unique_first_names(individuals, families):
     """
     US25
