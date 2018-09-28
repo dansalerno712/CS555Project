@@ -255,6 +255,34 @@ def no_bigamy(individuals, families):
         output += "No one is practicing polygamy\n"
     return (flag, output)
 
+def sibling_spacings(individuals, families):
+    flag = True
+    output = ""
+    fam_children = [fam.children for fam in families]
+    checked = []
+    for kids in fam_children:
+        if(len(kids) < 2):
+            continue
+        kid_indis = [kid for kid in individuals if kid.ID in kids]
+        for k in kid_indis:
+            k1_bday = datetime.strptime(k.birthday, '%d %b %Y')
+            for k2 in kid_indis:
+                k2_bday = datetime.strptime(k2.birthday, '%d %b %Y')
+                if(k == k2):
+                    continue
+                elif (k,k2) in checked or (k2,k) in checked:
+                    continue
+                bday_diff_months = abs(k1_bday.year - k2_bday.year)* 12 + k1_bday.month - k2_bday.month
+                bday_diff_days = abs(k1_bday - k2_bday) 
+                if(bday_diff_days.days > 1 and bday_diff_months < 8):
+                    checked.append((k,k2))
+                    flag = False
+                    output+= "Error: " + str(k) + " and " + str(k2) + " are less than 8 months and more than 2 days apart.\n" # Diff in days: " + str(bday_diff_days) + "\n" + "Diff in months: " + str(bday_diff_months) + "\n"
+    if(flag):
+        output += "All siblings are born more than 8 months or less than 2 days apart\n"
+    return (flag, output)
+
+
 
 
  

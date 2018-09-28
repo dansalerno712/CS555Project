@@ -46,6 +46,10 @@ def main():
     print("User Story 11: No bigamy")
     result, output = Checks.no_bigamy(individuals, families)
     print(output)
+    print("User Story 13: Sibling spacings")
+    result, output = Checks.sibling_spacings(individuals, families)
+    print(output)
+   
 
 
 if __name__ == '__main__':
