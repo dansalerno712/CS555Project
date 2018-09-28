@@ -43,6 +43,10 @@ def main():
     result, output = Checks.unique_first_names(individuals, families)
     print(output)
 
+    print("User Story 11: No bigamy")
+    result, output = Checks.no_bigamy(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
