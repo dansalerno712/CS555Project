@@ -256,6 +256,18 @@ def no_bigamy(individuals, families):
     return (flag, output)
 
 def sibling_spacings(individuals, families):
+    """
+    US13
+    Checks that all siblings are born more than 8 months or less than 2 days apart
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all siblings are born more than 8 months or less than 2 days apart, this returns
+        (True, "All siblings are born more than 8 months or less than 2 days apart"). If all siblings are born more than 8 months or less than 2 days apart, this returns
+        (False, <a string to output that lists errors>)
+    """
     flag = True
     output = ""
     fam_children = [fam.children for fam in families]
