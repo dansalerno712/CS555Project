@@ -194,7 +194,20 @@ def unique_first_names(individuals, families):
     if flag:
         output += "All children in the all families do not have the same names and birth dates."
     return (flag, output)
+
 def no_bigamy(individuals, families):
+    """
+    US11
+    Checks that each individual is only married to one partner at a time
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all individuals are married to one person at a time, this returns
+        (True, "No one is practicing polygamy"). If all individuals are not married to one person at a time, this returns
+        (False, <a string to output that lists errors>)
+    """
     flag = True
     output = ""
     #Go through the familes
