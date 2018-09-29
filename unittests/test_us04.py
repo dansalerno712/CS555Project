@@ -24,32 +24,37 @@ class TestUS04(unittest.TestCase):
         self.families[1].divorced = "31 DEC 1980"
         result, output = Checks.marriage_before_divorce(self.families)
         self.assertEqual(result, True)
-        self.assertEqual(output, "All families are married before they are divorced\n")
+        self.assertEqual(
+            output, "All families are married before they are divorced\n")
         # put things back
         self.families[1].ID = "31 DEC 1979"
 
     def test_family_2_bad(self):
         result, output = Checks.marriage_before_divorce(self.families)
         self.assertEqual(result, False)
-        self.assertEqual(output, "Error: " + str(self.families[1]) + " has a divorce before a marriage\n")
+        self.assertEqual(
+            output, "Error: " + str(self.families[1]) + " has a divorce before a marriage\n")
 
     def test_family_1_bad(self):
         self.families[0].divorced = "3 MAR 1959"
         self.families[1].divorced = "31 DEC 1980"
         result, output = Checks.marriage_before_divorce(self.families)
         self.assertEqual(result, False)
-        self.assertEqual(output, "Error: " + str(self.families[0]) + " has a divorce before a marriage\n")
+        self.assertEqual(
+            output, "Error: " + str(self.families[0]) + " has a divorce before a marriage\n")
 
     def test_families_all_bad(self):
         self.families[0].divorced = "3 MAR 1959"
         result, output = Checks.marriage_before_divorce(self.families)
         self.assertEqual(result, False)
-        self.assertEqual(output, "Error: " + str(self.families[0]) + " has a divorce before a marriage\n" + "Error: " + str(self.families[1]) + " has a divorce before a marriage\n")
+        self.assertEqual(output, "Error: " + str(self.families[0]) + " has a divorce before a marriage\n" + "Error: " + str(
+            self.families[1]) + " has a divorce before a marriage\n")
 
     def test_empty_families(self):
         result, output = Checks.marriage_before_divorce([])
         self.assertEqual(result, True)
-        self.assertEqual(output, "All families are married before they are divorced\n")
+        self.assertEqual(
+            output, "All families are married before they are divorced\n")
 
 
 if __name__ == '__main__':

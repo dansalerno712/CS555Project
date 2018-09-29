@@ -22,24 +22,27 @@ class TestUS09(unittest.TestCase):
     # all tests need to be named test_<name_of_function>
     def test_child_born_before_both_parents_death(self):
         # remove the duplicate individuals and families
-        result, output = Checks.birth_before_parents_death(self.individuals, self.families)
+        result, output = Checks.birth_before_parents_death(
+            self.individuals, self.families)
         self.assertEqual(result, True)
-        self.assertEqual(output, "All children are born before the death of the mother or within nine months of the death of the father.")
+        self.assertEqual(
+            output, "All children are born before the death of the mother or within nine months of the death of the father.")
         # put things back
 
     def test_child_born_after_mom_death(self):
         self.individuals[2].death = "17 JAN 1996"
-        result, output = Checks.birth_before_parents_death(self.individuals, self.families)
+        result, output = Checks.birth_before_parents_death(
+            self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
             output, "Error: " + str(self.families[0]) + " has a child " + str(self.individuals[0].ID) + " born after the mother's death.\n")
         self.individuals[2].death = "None"
 
-
     def test_child_born_after_dad_death(self):
         # edit things
         self.individuals[1].death = "1 MAR 1995"
-        result, output = Checks.birth_before_parents_death(self.individuals, self.families)
+        result, output = Checks.birth_before_parents_death(
+            self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
             output, "Error: " + str(self.families[0]) + " has a child " + str(self.individuals[0].ID) + " born more than 9 months after the father's death.\n")
@@ -50,10 +53,11 @@ class TestUS09(unittest.TestCase):
         # edit things
         self.individuals[1].death = "1 MAR 1995"
         self.individuals[2].death = "1 MAR 1995"
-        result, output = Checks.birth_before_parents_death(self.individuals, self.families)
+        result, output = Checks.birth_before_parents_death(
+            self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
-            output, "Error: " + str(self.families[0]) + " has a child " + str(self.individuals[0].ID) + " born after the mother's death.\n" + "Error: " + str(self.families[0]) + " has a child " + str(self.individuals[0].ID) + " born more than 9 months after the father's death.\n" )
+            output, "Error: " + str(self.families[0]) + " has a child " + str(self.individuals[0].ID) + " born after the mother's death.\n" + "Error: " + str(self.families[0]) + " has a child " + str(self.individuals[0].ID) + " born more than 9 months after the father's death.\n")
         # put things back
         self.individuals[1].death = "None"
         self.individuals[2].death = "None"
@@ -61,7 +65,8 @@ class TestUS09(unittest.TestCase):
     def test_child_born_within_9m_dad_death(self):
         # edit things
         self.individuals[1].death = "1 SEP 1996"
-        result, output = Checks.birth_before_parents_death(self.individuals, self.families)
+        result, output = Checks.birth_before_parents_death(
+            self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
             output, "All children are born before the death of the mother or within nine months of the death of the father.")

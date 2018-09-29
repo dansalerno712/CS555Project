@@ -3,6 +3,7 @@ from collections import Counter
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
+
 def unique_IDs(individuals, families):
     """US 22
     Checks to make sure all individual IDs are unique and all
@@ -49,6 +50,7 @@ def unique_IDs(individuals, families):
 
         return (False, output)
 
+
 def marriage_before_divorce(families):
     """US 04
     Checks to make sure that a marriage occurs before a divorce
@@ -64,15 +66,17 @@ def marriage_before_divorce(families):
     flag = True
     output = ""
     for family in families:
-        if family.divorced != None:
+        if family.divorced is not None:
             married_date = datetime.strptime(family.married, '%d %b %Y')
             divorced_date = datetime.strptime(family.divorced, '%d %b %Y')
             if married_date > divorced_date:
                 flag = False
-                output += "Error: " + str(family) + " has a divorce before a marriage\n"
+                output += "Error: " + str(family) + \
+                    " has a divorce before a marriage\n"
     if flag:
         output += "All families are married before they are divorced\n"
     return (flag, output)
+
 
 def dates_before_current_date(individuals, families):
     """
@@ -94,25 +98,30 @@ def dates_before_current_date(individuals, families):
         birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
         if birth_date > curr:
             flag = False
-            output += "Error: " + str(individual) + " has a birth after current date.\n"
-        if individual.death != None:
+            output += "Error: " + str(individual) + \
+                " has a birth after current date.\n"
+        if individual.death is not None:
             death_date = datetime.strptime(individual.death, '%d %b %Y')
             if death_date > curr:
                 flag = False
-                output += "Error: " + str(individual) + " has a death after current date.\n"
+                output += "Error: " + \
+                    str(individual) + " has a death after current date.\n"
     for family in families:
         married_date = datetime.strptime(family.married, '%d %b %Y')
         if married_date > curr:
             flag = False
-            output += "Error: " + str(family) + " has a marriage after current date.\n"
-        if family.divorced != None:
+            output += "Error: " + str(family) + \
+                " has a marriage after current date.\n"
+        if family.divorced is not None:
             divorced_date = datetime.strptime(family.divorced, '%d %b %Y')
             if divorced_date > curr:
                 flag = False
-                output += "Error: " + str(family) + " has a divorce after current date.\n"
+                output += "Error: " + str(family) + \
+                    " has a divorce after current date.\n"
     if flag:
         output += "All dates are after current date."
     return (flag, output)
+
 
 def birth_before_parents_death(individuals, families):
     """
@@ -137,10 +146,10 @@ def birth_before_parents_death(individuals, families):
         children = {}
         for individual in individuals:
             if individual.ID == family.wife_ID:
-                if individual.death != None:
+                if individual.death is not None:
                     mom_death = datetime.strptime(individual.death, '%d %b %Y')
             elif individual.ID == family.husband_ID:
-                if individual.death != None:
+                if individual.death is not None:
                     dad_death = datetime.strptime(individual.death, '%d %b %Y')
             else:
                 if individual.ID in family.children:
@@ -148,15 +157,19 @@ def birth_before_parents_death(individuals, families):
         for c in children:
             child = children[c]
             child_birthday = datetime.strptime(child.birthday, '%d %b %Y')
-            if mom_death != None and child_birthday > mom_death:
+            if mom_death is not None and child_birthday > mom_death:
                 flag = False
-                output += "Error: " + str(family) + " has a child " + str(child.ID) + " born after the mother's death.\n"
-            if dad_death != None and child_birthday > (dad_death + relativedelta(months = 9)):
+                output += "Error: " + \
+                    str(family) + " has a child " + str(child.ID) + \
+                    " born after the mother's death.\n"
+            if dad_death is not None and child_birthday > (dad_death + relativedelta(months=9)):
                 flag = False
-                output += "Error: " + str(family) + " has a child " + str(child.ID) + " born more than 9 months after the father's death.\n"
+                output += "Error: " + str(family) + " has a child " + str(
+                    child.ID) + " born more than 9 months after the father's death.\n"
     if flag:
         output += "All children are born before the death of the mother or within nine months of the death of the father."
     return (flag, output)
+
 
 def unique_first_names(individuals, families):
     """
@@ -185,15 +198,18 @@ def unique_first_names(individuals, families):
                             flag = False
                             children[individual.name][1] += [str(individual)]
                         else:
-                            children[individual.name] = [individual.birthday, [str(individual)]]
+                            children[individual.name] = [
+                                individual.birthday, [str(individual)]]
                     else:
                         continue
             for key in children.keys():
                 if len(children[key][1]) > 1:
-                    output += "Error: " + str(family) + " has children, ".join(children[key][1]) + ", with the same first name and birthday.\n"
+                    output += "Error: " + str(family) + " has children, ".join(
+                        children[key][1]) + ", with the same first name and birthday.\n"
     if flag:
         output += "All children in the all families do not have the same names and birth dates."
     return (flag, output)
+
 
 def no_bigamy(individuals, families):
     """
@@ -210,50 +226,60 @@ def no_bigamy(individuals, families):
     """
     flag = True
     output = ""
-    #Go through the familes
+    # Go through the familes
     for f in families:
         wife = next(x for x in individuals if x.ID == f.wife_ID)
         husband = next(x for x in individuals if x.ID == f.husband_ID)
         fMar = datetime.strptime(f.married, '%d %b %Y')
-        #Compare families
+        # Compare families
         for f2 in families:
-            #Dont compare to itself
+            # Dont compare to itself
             if(f == f2):
                 continue
             f2Mar = datetime.strptime(f2.married, '%d %b %Y')
-            #Make sure second marriage happend after original
+            # Make sure second marriage happend after original
             if(f2Mar > fMar):
-                #Checks if wife
+                # Checks if wife
                 if(wife.ID == f2.wife_ID):
-                    #Spouse is alive and family is not divorced
+                    # Spouse is alive and family is not divorced
                     if husband.alive and f.divorced is None:
                         flag = False
-                        output+= "Error: " + str(wife) + " is/was married to multiple people at the same time\n"
-                    #If family is divorced check if divorce happened before second marriage
-                    elif f.divorced != None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'):
+                        output += "Error: " + \
+                            str(wife) + " is/was married to multiple people at the same time\n"
+                    # If family is divorced check if divorce happened before second marriage
+                    elif f.divorced is not None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'):
                         flag = False
-                        output+= "Error: " + str(wife) + " is/was married to multiple people at the same time\n"
-                    #If spouse is dead check if death happened before second marriage
-                    elif((husband.death != None and f2Mar < datetime.strptime(husband.death, '%d %b %Y'))):
+                        output += "Error: " + \
+                            str(wife) + " is/was married to multiple people at the same time\n"
+                    # If spouse is dead check if death happened before second marriage
+                    elif((husband.death is not None and f2Mar < datetime.strptime(husband.death, '%d %b %Y'))):
                         flag = False
-                        output+= "Error: " + str(wife) + " is/was married to multiple people at the same time\n"
-                #Check if husband
+                        output += "Error: " + \
+                            str(wife) + " is/was married to multiple people at the same time\n"
+                # Check if husband
                 if(husband.ID == f2.husband_ID):
-                    #Spouse is alive and family is not divorced
+                    # Spouse is alive and family is not divorced
                     if husband.alive and f.divorced is None:
                         flag = False
-                        output+= "Error: " + str(husband) + " is/was married to multiple people at the same time\n"
-                    #If family is divorced check if divorce happened before second marriage
-                    elif((f.divorced!= None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'))):
+                        output += "Error: " + \
+                            str(husband) + \
+                            " is/was married to multiple people at the same time\n"
+                    # If family is divorced check if divorce happened before second marriage
+                    elif((f.divorced is not None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'))):
                         flag = False
-                        output+= "Error: " + str(husband) + " is/was married to multiple people at the same time\n"
-                    #If spouse is dead check if death happened before second marriage
-                    elif((wife.death != None and f2Mar < datetime.strptime(wife.death, '%d %b %Y'))):
+                        output += "Error: " + \
+                            str(husband) + \
+                            " is/was married to multiple people at the same time\n"
+                    # If spouse is dead check if death happened before second marriage
+                    elif((wife.death is not None and f2Mar < datetime.strptime(wife.death, '%d %b %Y'))):
                         flag = False
-                        output+= "Error: " + str(husband) + " is/was married to multiple people at the same time\n"
+                        output += "Error: " + \
+                            str(husband) + \
+                            " is/was married to multiple people at the same time\n"
     if flag:
         output += "No one is practicing polygamy\n"
     return (flag, output)
+
 
 def sibling_spacings(individuals, families):
     """
@@ -282,19 +308,43 @@ def sibling_spacings(individuals, families):
                 k2_bday = datetime.strptime(k2.birthday, '%d %b %Y')
                 if(k == k2):
                     continue
-                elif (k,k2) in checked or (k2,k) in checked:
+                elif (k, k2) in checked or (k2, k) in checked:
                     continue
-                bday_diff_months = abs(k1_bday.year - k2_bday.year)* 12 + k1_bday.month - k2_bday.month
-                bday_diff_days = abs(k1_bday - k2_bday) 
+                bday_diff_months = abs(
+                    k1_bday.year - k2_bday.year) * 12 + k1_bday.month - k2_bday.month
+                bday_diff_days = abs(k1_bday - k2_bday)
                 if(bday_diff_days.days > 1 and bday_diff_months < 8):
-                    checked.append((k,k2))
+                    checked.append((k, k2))
                     flag = False
-                    output+= "Error: " + str(k) + " and " + str(k2) + " are less than 8 months and more than 2 days apart.\n" # Diff in days: " + str(bday_diff_days) + "\n" + "Diff in months: " + str(bday_diff_months) + "\n"
+                    # Diff in days: " + str(bday_diff_days) + "\n" + "Diff in months: " + str(bday_diff_months) + "\n"
+                    output += "Error: " + \
+                        str(k) + " and " + str(k2) + \
+                        " are less than 8 months and more than 2 days apart.\n"
     if(flag):
         output += "All siblings are born more than 8 months or less than 2 days apart\n"
     return (flag, output)
 
 
+def fewer_than_15_sibilings(families):
+    """US 15: Fewer than 15 sibilings
 
+    Args:
+        families (list): A list of family objects
 
- 
+    Returns:
+        tuple: Tuple in the form (result, output). If all families have less than 15 sibilings, output is
+        All families have less than 15 sibilings. Else, output contains the families that have too many
+        sibiling
+    """
+    flag = True
+    output = ""
+
+    for fam in families:
+        if len(fam.children) >= 15:
+            flag = False
+            output += "Error: family " + str(fam) + " has 15 or more sibilings\n"
+
+    if flag:
+        output += "All families have less than 15 sibilings"
+
+    return (flag, output)

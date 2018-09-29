@@ -36,22 +36,21 @@ def parse(path):
     # grab the lines that correspond to the INDIs and FAMs
     for i in range(len(indexes) - 1):
         index, tag = indexes[i]
-        next_index, _ = indexes[i + 1]
+        next_index, next_tag = indexes[i + 1]
 
         if tag == "INDI":
-            # make sure to grab the last set of data if we are at the end
-            if i == (len(indexes) - 2):
-                individuals_data.append(lines[index:next_index])
-                individuals_data.append(lines[next_index:])
-            else:
-                individuals_data.append(lines[index:next_index])
+            individuals_data.append(lines[index:next_index])
 
         if tag == "FAM":
-            if i == (len(indexes) - 2):
-                families_data.append(lines[index:next_index])
+            families_data.append(lines[index:next_index])
+
+        # make sure to grab the last set of data if we are at the end
+        if i == (len(indexes) - 2):
+            if next_tag == "INDI":
+                individuals_data.append(lines[next_index:])
+
+            if next_tag == "FAM":
                 families_data.append(lines[next_index:])
-            else:
-                families_data.append(lines[index:next_index])
 
     # Creating the actual objects
     individuals = []
