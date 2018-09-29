@@ -26,9 +26,11 @@ class TestUS25(unittest.TestCase):
         self.individuals[8].name = "Stephen Cafiero"
         self.individuals[0].birthday = "29 SEP 1990"
         self.individuals[8].birthday = "16 APR 1970"
-        result, output = Checks.unique_first_names(self.individuals, self.families)
+        result, output = Checks.unique_first_names(
+            self.individuals, self.families)
         self.assertEqual(result, True)
-        self.assertEqual(output, "All children in the all families do not have the same names and birth dates.")
+        self.assertEqual(
+            output, "All children in the all families do not have the same names and birth dates.")
         # put things back
         self.individuals[0].name = "Jennifer Cafiero"
         self.individuals[8].name = "John Cafiero"
@@ -36,7 +38,8 @@ class TestUS25(unittest.TestCase):
         self.individuals[8].birthday = "16 APR 1968"
 
     def test_unique_names_and_birthday_bad(self):
-        result, output = Checks.unique_first_names(self.individuals, self.families)
+        result, output = Checks.unique_first_names(
+            self.individuals, self.families)
         self.assertEqual(result, False)
         c0 = [str(self.individuals[0]), str(self.individuals[3])]
         c1 = [str(self.individuals[1]), str(self.individuals[8])]
@@ -52,7 +55,8 @@ class TestUS25(unittest.TestCase):
         # edit things
         self.individuals[0].name = "Hanna Cafiero"
         self.individuals[8].name = "Stephen Cafiero"
-        result, output = Checks.unique_first_names(self.individuals, self.families)
+        result, output = Checks.unique_first_names(
+            self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
             output, "All children in the all families do not have the same names and birth dates.")
@@ -64,10 +68,11 @@ class TestUS25(unittest.TestCase):
         # edit things
         self.individuals[0].birthday = "29 SEP 1990"
         self.individuals[8].birthday = "16 APR 1970"
-        result, output = Checks.unique_first_names(self.individuals, self.families)
+        result, output = Checks.unique_first_names(
+            self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
-            output,  "All children in the all families do not have the same names and birth dates.")
+            output, "All children in the all families do not have the same names and birth dates.")
         # put things back
         self.individuals[0].birthday = "29 SEP 1996"
         self.individuals[8].birthday = "16 APR 1968"
@@ -76,9 +81,11 @@ class TestUS25(unittest.TestCase):
         # edit things
         self.families = []
         self.individuals = []
-        result, output = Checks.unique_first_names(self.individuals, self.families)
+        result, output = Checks.unique_first_names(
+            self.individuals, self.families)
         self.assertEqual(result, True)
-        self.assertEqual(output, "All children in the all families do not have the same names and birth dates.")
+        self.assertEqual(
+            output, "All children in the all families do not have the same names and birth dates.")
         # put things back
         individuals, families = parse("../testfiles/US22_test.ged")
         self.individuals = individuals

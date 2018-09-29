@@ -11,12 +11,12 @@ To run a specific unittest, type
 ```bash
 python <your unit test file> -v
 ```
-in the `tests` directory
+in the `unittests` directory
 
 To run all unittests, type
 ```bash
 python -m unittest discover -v
 ```
-in the `tests` directory
+in the `unittests` directory
 
 Check the `test_us22.py` file for an example of how to setup a single unittest file
