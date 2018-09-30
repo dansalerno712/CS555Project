@@ -60,3 +60,6 @@ class Family(object):
             "| Wife ID: " + str(self.wife_ID) + \
             "| Wife Name: " + str(self.wife_name) + \
             "| Children: " + str(self.children) + "}"
+
+    def __repr__(self):
+        return self.__str__()

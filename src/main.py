@@ -20,25 +20,34 @@ def main():
 
     print("=============Individuals==============")
     for indi in individuals:
-        print("ID: " + indi.ID + "\tName: " + indi.name)
+        print(indi)
 
     print("=============Families==============")
     for fam in families:
-        print("ID: " + fam.ID + "\tHusband Name: " +
-              fam.husband_name + "\tWife Name: " + fam.wife_name)
+        print(fam)
 
     print("==============Error/Anomaly Checks============")
+    print("User Story 27: Print Age")
+    if len(individuals) > 0:
+        print(individuals[0])
+    print()
+
     print("User Story 22: Unique IDs")
     result, output = Checks.unique_IDs(individuals, families)
     print(output)
+
     print("User Story 04: Marriage Before Divorce")
     result, output = Checks.marriage_before_divorce(families)
     print(output)
+
     print("User Story 01: Dates Before Current Date")
     result, output = Checks.dates_before_current_date(individuals, families)
     print(output)
+
     print("User Story 09: Birth Before the Death of Parents")
     result, output = Checks.birth_before_parents_death(individuals, families)
+    print(output)
+
     print("User Story 25: Unique First Names in Families")
     result, output = Checks.unique_first_names(individuals, families)
     print(output)
@@ -46,6 +55,7 @@ def main():
     print("User Story 11: No bigamy")
     result, output = Checks.no_bigamy(individuals, families)
     print(output)
+
     print("User Story 13: Sibling spacings")
     result, output = Checks.sibling_spacings(individuals, families)
     print(output)

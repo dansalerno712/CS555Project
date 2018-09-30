@@ -70,3 +70,6 @@ class Individual(object):
             "| Death: " + str(self.death) + \
             "| Child: " + str(self.child) + \
             "| Spouse: " + str(self.spouse) + "}"
+
+    def __repr__(self):
+        return self.__str__()
