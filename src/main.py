@@ -64,6 +64,9 @@ def main():
     result, output = Checks.fewer_than_15_sibilings(families)
     print(output)
 
+    print("User Story 29: List deceased")
+    Checks.list_deceased(individuals)
+
 
 if __name__ == '__main__':
     main()
