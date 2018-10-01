@@ -65,7 +65,8 @@ def main():
     print(output)
 
     print("User Story 29: List deceased")
-    Checks.list_deceased(individuals)
+    output = Checks.list_deceased(individuals)
+    print(output)
 
 
 if __name__ == '__main__':

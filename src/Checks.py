@@ -353,19 +353,20 @@ def fewer_than_15_sibilings(families):
 
 def list_deceased(individuals):
     """US 29: List deceased. Doesnt return anything, just prints things
-
+    
     Args:
         individuals (list): A list of individuals from the file
+    
+    Returns:
+        string: The deceased individuals as strings
     """
-    # possible code smell: should i return output here so it works like other stories?
+    # possible code smell: should i return here so it works like other stories?
     output = ""
     for indi in individuals:
         if indi.death is not None:
-            output += str(indi)
+            output += str(indi) + "\n"
 
     if len(output) == 0:
         output = "No deceased individuals\n"
-    else:
-        output += "\n"
 
-    print(output)
+    return output
