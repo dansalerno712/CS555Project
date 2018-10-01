@@ -17,6 +17,6 @@ To run all unittests, type
 ```bash
 python -m unittest discover -v
 ```
-in the `unittests` directory
+in the `unittests` directory or run `runTests.sh` is the main directory
 
 Check the `test_us22.py` file for an example of how to setup a single unittest file
