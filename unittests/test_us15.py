@@ -30,7 +30,7 @@ class TestUS15(unittest.TestCase):
         self.families[0].children = self.families[0].children[:10]
         result, output = Checks.fewer_than_15_sibilings(self.families)
         self.assertEqual(result, True)
-        self.assertEqual(output, "All families have less than 15 sibilings")
+        self.assertEqual(output, "All families have less than 15 sibilings\n")
         # put it back
         individuals, families = parse("../testfiles/US15_test.ged")
         self.families = families
@@ -38,7 +38,7 @@ class TestUS15(unittest.TestCase):
     def test_empty_input(self):
         result, output = Checks.fewer_than_15_sibilings([])
         self.assertEqual(result, True)
-        self.assertEqual(output, "All families have less than 15 sibilings")
+        self.assertEqual(output, "All families have less than 15 sibilings\n")
 
 
 if __name__ == '__main__':
