@@ -342,9 +342,30 @@ def fewer_than_15_sibilings(families):
     for fam in families:
         if len(fam.children) >= 15:
             flag = False
-            output += "Error: family " + str(fam) + " has 15 or more sibilings\n"
+            output += "Error: family " + \
+                str(fam) + " has 15 or more sibilings\n"
 
     if flag:
-        output += "All families have less than 15 sibilings"
+        output += "All families have less than 15 sibilings\n"
 
     return (flag, output)
+
+
+def list_deceased(individuals):
+    """US 29: List deceased. Doesnt return anything, just prints things
+
+    Args:
+        individuals (list): A list of individuals from the file
+    """
+    # possible code smell: should i return output here so it works like other stories?
+    output = ""
+    for indi in individuals:
+        if indi.death is not None:
+            output += str(indi)
+
+    if len(output) == 0:
+        output = "No deceased individuals\n"
+    else:
+        output += "\n"
+
+    print(output)
