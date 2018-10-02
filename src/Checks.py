@@ -210,6 +210,31 @@ def unique_first_names(individuals, families):
         output += "All children in the all families do not have the same names and birth dates."
     return (flag, output)
 
+def age_less_than_150(individuals):
+    """US 07
+    Checks to make sure that an individual is less than 150 years old
+
+    Args:
+        individuals (list): List of Individual objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all individuals are less than 150 years old,
+        this returns (True, "All individuals are less than 150 years old\n"). If there are individuals
+        over the age of 150, this returns (False, <a string to output that lists errors>).
+    """
+    flag = True
+    output = ""
+    curr_date = datetime.now()
+    for individual in individuals:
+        if individual.alive:
+            birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+            age = curr_date - birth_date
+            if age.days > (150 * 365):
+                flag = False
+                output += "Error: " + str(individual.ID) + " is more than 150 years old.\n"
+    if flag:
+        output += "All individuals are less than 150 years old.\n"
+    return (flag, output)
 
 def no_bigamy(individuals, families):
     """
@@ -353,10 +378,10 @@ def fewer_than_15_sibilings(families):
 
 def list_deceased(individuals):
     """US 29: List deceased. Doesnt return anything, just prints things
-    
+
     Args:
         individuals (list): A list of individuals from the file
-    
+
     Returns:
         string: The deceased individuals as strings
     """
@@ -369,5 +394,36 @@ def list_deceased(individuals):
 
     if flag:
         output = "No deceased individuals\n"
+        
+    return (flag, output)
+
+def marriage_after_14(individuals, families):
+    """
+    US10
+    Checks to make sure that marriage occurs at least 14 years after birth of both spouses
+    (parents must be at least 14 years old)
+
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all marriages occur after the age of 14, this returns
+        (True, ""All individuals were married above the age of 14.") If individuals are less than 14 when a
+        marriage occurs, this returns (False, <a string to output that lists errors>).
+    """
+    flag = True
+    output = ""
+    for family in families:
+        wedding_date = datetime.strptime(family.married, '%d %b %Y')
+        for individual in individuals:
+            birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+            if individual.ID == family.wife_ID or individual.ID == family.husband_ID:
+                wedding_age = wedding_date - birth_date
+                if wedding_age.days < (14 * 365):
+                    flag = False
+                    output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(individual.ID) + " was not above the age of 14.\n"
+    if flag:
+        output += "All individuals were married above the age of 14.\n"
 
     return (flag, output)
