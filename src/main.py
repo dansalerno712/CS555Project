@@ -68,7 +68,7 @@ def main():
     print(output)
 
     print("User Story 29: List deceased")
-    output = Checks.list_deceased(individuals)
+    result, output = Checks.list_deceased(individuals)
     print(output)
 
     print("User Story 10: Marriage after 14")

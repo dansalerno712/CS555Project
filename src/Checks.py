@@ -385,16 +385,17 @@ def list_deceased(individuals):
     Returns:
         string: The deceased individuals as strings
     """
-    # possible code smell: should i return here so it works like other stories?
+    flag = True
     output = ""
     for indi in individuals:
         if indi.death is not None:
+            flag = False
             output += str(indi) + "\n"
 
-    if len(output) == 0:
+    if flag:
         output = "No deceased individuals\n"
-
-    return output
+        
+    return (flag, output)
 
 def marriage_after_14(individuals, families):
     """
@@ -424,4 +425,5 @@ def marriage_after_14(individuals, families):
                     output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(individual.ID) + " was not above the age of 14.\n"
     if flag:
         output += "All individuals were married above the age of 14.\n"
+
     return (flag, output)
