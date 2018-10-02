@@ -71,6 +71,10 @@ def main():
     output = Checks.list_deceased(individuals)
     print(output)
 
+    print("User Story 10: Marriage after 14")
+    result, output = Checks.marriage_after_14(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

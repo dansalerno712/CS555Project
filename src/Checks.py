@@ -395,3 +395,33 @@ def list_deceased(individuals):
         output = "No deceased individuals\n"
 
     return output
+
+def marriage_after_14(individuals, families):
+    """
+    US10
+    Checks to make sure that marriage occurs at least 14 years after birth of both spouses
+    (parents must be at least 14 years old)
+
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all marriages occur after the age of 14, this returns
+        (True, ""All individuals were married above the age of 14.") If individuals are less than 14 when a
+        marriage occurs, this returns (False, <a string to output that lists errors>).
+    """
+    flag = True
+    output = ""
+    for family in families:
+        wedding_date = datetime.strptime(family.married, '%d %b %Y')
+        for individual in individuals:
+            birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+            if individual.ID == family.wife_ID or individual.ID == family.husband_ID:
+                wedding_age = wedding_date - birth_date
+                if wedding_age.days < (14 * 365):
+                    flag = False
+                    output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(individual.ID) + " was not above the age of 14.\n"
+    if flag:
+        output += "All individuals were married above the age of 14.\n"
+    return (flag, output)
