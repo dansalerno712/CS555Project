@@ -232,9 +232,6 @@ def age_less_than_150(individuals):
             if age.days > (150 * 365):
                 flag = False
                 output += "Error: " + str(individual.ID) + " is more than 150 years old.\n"
-        '''else:
-            flag = False
-            output += "Error: " + str(individual) + " is no longer alive" '''
     if flag:
         output += "All individuals are less than 150 years old.\n"
     return (flag, output)
