@@ -210,6 +210,34 @@ def unique_first_names(individuals, families):
         output += "All children in the all families do not have the same names and birth dates."
     return (flag, output)
 
+def age_less_than_150(individuals):
+    """US 07
+    Checks to make sure that an individual is less than 150 years old
+
+    Args:
+        individuals (list): List of Individual objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If all individuals are less than 150 years old,
+        this returns (True, "All individuals are less than 150 years old\n"). If there are individuals
+        over the age of 150, this returns (False, <a string to output that lists errors>).
+    """
+    flag = True
+    output = ""
+    curr_date = datetime.now()
+    for individual in individuals:
+        if individual.alive:
+            birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+            age = curr_date - birth_date
+            if age.days > (150 * 365):
+                flag = False
+                output += "Error: " + str(individual.ID) + " is more than 150 years old.\n"
+        '''else:
+            flag = False
+            output += "Error: " + str(individual) + " is no longer alive" '''
+    if flag:
+        output += "All individuals are less than 150 years old.\n"
+    return (flag, output)
 
 def no_bigamy(individuals, families):
     """
@@ -353,10 +381,10 @@ def fewer_than_15_sibilings(families):
 
 def list_deceased(individuals):
     """US 29: List deceased. Doesnt return anything, just prints things
-    
+
     Args:
         individuals (list): A list of individuals from the file
-    
+
     Returns:
         string: The deceased individuals as strings
     """

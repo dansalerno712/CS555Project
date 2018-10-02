@@ -1,0 +1,159 @@
+0 NOTE https://github.com/dansalerno712/CS555Project
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE My Family
+1 DATE 30 AUG 2018
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Jennifer Cafiero
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Jennifer /Cafiero/
+2 GIVN Jennifer
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX F
+1 BIRT
+2 DATE 29 SEP 1996
+1 FAMC @F1@
+0 @I2@ INDI
+1 NAME Stephen /Cafiero/
+2 GIVN Stephen
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX M
+1 BIRT
+2 DATE 9 APR 1960
+1 FAMS @F1@
+1 FAMC @F2@
+0 @I3@ INDI
+1 NAME Anne /Sorrentino/
+2 GIVN Anne
+2 SURN Sorrentino
+2 _MARNM Cafiero
+1 SEX F
+1 BIRT
+2 DATE 5 MAY 1963
+1 FAMS @F1@
+0 @I4@ INDI
+1 NAME John /Cafiero/
+2 GIVN John
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX M
+1 BIRT
+2 DATE 17 MAR 1993
+1 FAMC @F1@
+0 @I5@ INDI
+1 NAME Stephen /Cafiero/
+2 GIVN Stephen
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX M
+1 BIRT
+2 DATE 28 MAY 1994
+1 FAMC @F1@
+0 @I6@ INDI
+1 NAME Christopher /Cafiero/
+2 GIVN Christopher
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX M
+1 BIRT
+2 DATE 24 JUN 1994
+1 FAMC @F1@
+0 @I7@ INDI
+1 NAME John /Cafiero/
+2 GIVN John
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX M
+1 BIRT
+2 DATE 13 MAR 1933
+1 DEAT Y
+2 DATE 17 JAN 2015
+1 FAMS @F2@
+0 @I8@ INDI
+1 NAME Vera /Chowansky/
+2 GIVN Vera
+2 SURN Chowansky
+2 _MARNM Robbins
+1 SEX F
+1 BIRT
+2 DATE 11 MAY 1942
+1 FAMS @F2@
+1 FAMS @F3@
+0 @I9@ INDI
+1 NAME John /Cafiero/
+2 GIVN John
+2 SURN Cafiero
+2 _MARNM Cafiero
+1 SEX M
+1 BIRT
+2 DATE 16 APR 1968
+1 FAMC @F2@
+0 @I10@ INDI
+1 NAME Jim /Robbins/
+2 GIVN Jim
+2 SURN Robbins
+2 _MARNM Robbins
+1 SEX M
+1 BIRT
+2 DATE 18 AUG 1950
+1 FAMS @F3@
+1 FAMS @F4@
+0 @I11@ INDI
+1 NAME James /Robbins/
+2 GIVN James
+2 SURN Robbins
+2 _MARNM Robbins
+1 SEX M
+1 BIRT
+2 DATE 29 NOV 1970
+1 FAMC @F4@
+0 @I12@ INDI
+1 NAME Noel /Martinez/
+2 GIVN Noel
+2 SURN Martinez
+2 _MARNM Robbins
+1 SEX F
+1 BIRT
+2 DATE 7 DEC 1952
+1 FAMS @F4@
+0 @I13@ INDI
+1 NAME George /Robbins/
+2 GIVN George
+2 SURN Robbins
+2 _MARNM Robbins
+1 SEX M
+1 BIRT
+2 DATE 28 MAY 1978
+1 FAMC @F3@
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 CHIL @I4@
+1 CHIL @I5@
+1 CHIL @I6@
+1 MARR
+2 DATE 1 JAN 1960
+1 DIV
+2 DATE 3 MAR 1967
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I7@
+1 WIFE @I8@
+1 CHIL @I2@
+1 CHIL @I9@
+1 MARR
+2 DATE 1 JAN 1980
+1 DIV
+2 DATE 31 DEC 1979
+1 _CURRENT N
+0 TRLR

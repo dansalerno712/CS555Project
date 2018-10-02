@@ -51,6 +51,9 @@ def main():
     print("User Story 25: Unique First Names in Families")
     result, output = Checks.unique_first_names(individuals, families)
     print(output)
+    print("User Story 07: Less than 150 years old")
+    result, output = Checks.age_less_than_150(individuals)
+    print(output)
 
     print("User Story 11: No bigamy")
     result, output = Checks.no_bigamy(individuals, families)
