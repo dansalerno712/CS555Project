@@ -227,9 +227,9 @@ def age_less_than_150(individuals):
     curr_date = datetime.now()
     for individual in individuals:
         if individual.alive:
-            birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
-            age = curr_date - birth_date
-            if age.days > (150 * 365):
+            # birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+            # age = curr_date - birth_date
+            if individual.age > 150:
                 flag = False
                 output += "Error: " + str(individual.ID) + " is more than 150 years old.\n"
     if flag:
@@ -394,7 +394,7 @@ def list_deceased(individuals):
 
     if flag:
         output = "No deceased individuals\n"
-        
+
     return (flag, output)
 
 def marriage_after_14(individuals, families):
