@@ -20,18 +20,24 @@ class TestUS29(unittest.TestCase):
 
     # all tests need to be named test_<name_of_function>
     def test_deaths(self):
-        self.assertEqual(Checks.list_deceased(self.individuals), str(self.individuals[0]) + "\n" + str(self.individuals[1]) + "\n")
+        result, output = Checks.list_deceased(self.individuals)
+        self.assertEqual(result, False)
+        self.assertEqual(output, str(self.individuals[0]) + "\n" + str(self.individuals[1]) + "\n")
 
     def test_alive(self):
         self.individuals[0].death = None
         self.individuals[1].death = None
-        self.assertEqual(Checks.list_deceased(self.individuals), "No deceased individuals\n")
+        result, output = Checks.list_deceased(self.individuals)
+        self.assertEqual(result, True)
+        self.assertEqual(output, "No deceased individuals\n")
         individuals, families = parse(
             "../testfiles/US29_test.ged")
         self.individuals = individuals
 
     def test_empty_input(self):
-        self.assertEqual(Checks.list_deceased([]), "No deceased individuals\n")
+        result, output = Checks.list_deceased([])
+        self.assertEqual(result, True)
+        self.assertEqual(output, "No deceased individuals\n")
 
 
 if __name__ == '__main__':
