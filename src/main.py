@@ -75,6 +75,10 @@ def main():
     result, output = Checks.marriage_after_14(individuals, families)
     print(output)
 
+    print("User Story 03: Birth before Death")
+    result, output = Checks.birth_before_death(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
