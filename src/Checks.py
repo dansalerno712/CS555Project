@@ -427,3 +427,30 @@ def marriage_after_14(individuals, families):
         output += "All individuals were married above the age of 14.\n"
 
     return (flag, output)
+
+def birth_before_death(individuals, families):
+    """
+    US03
+    Checks to make sure birth of an individual is before their death
+    
+    Args:
+    individuals (list): List of Individual objects
+    families (list): List of Family objects
+    
+    Returns:
+    tuple: Tuple in the form (result, output). If all births are before deaths, this returns
+    (True, ""All individuals were born before their death.") If individuals have a death before
+    their birthday, this returns (False, <a string to output that lists errors>).
+    """
+    flag = True
+    output = ""
+    for individual in individuals:
+        if individual.death != None:
+            death = datetime.strptime(individual.death, '%d %b %Y')
+            birth = datetime.strptime(individual.birthday, '%d %b %Y')
+            if death < birth:
+                flag = False
+                output += "Error: " + str(individual) + " has a death date before their birthday.\n"
+    if flag:
+        output += "All individuals have death dates after birthdays.\n"
+    return (flag, output)
