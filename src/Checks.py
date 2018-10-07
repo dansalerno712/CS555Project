@@ -264,45 +264,27 @@ def no_bigamy(individuals, families):
             f2Mar = datetime.strptime(f2.married, '%d %b %Y')
             # Make sure second marriage happend after original
             if(f2Mar > fMar):
-                # Checks if wife
                 if(wife.ID == f2.wife_ID):
-                    # Spouse is alive and family is not divorced
-                    if husband.alive and f.divorced is None:
-                        flag = False
-                        output += "Error: " + \
-                            str(wife) + " is/was married to multiple people at the same time\n"
-                    # If family is divorced check if divorce happened before second marriage
-                    elif f.divorced is not None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'):
-                        flag = False
-                        output += "Error: " + \
-                            str(wife) + " is/was married to multiple people at the same time\n"
-                    # If spouse is dead check if death happened before second marriage
-                    elif((husband.death is not None and f2Mar < datetime.strptime(husband.death, '%d %b %Y'))):
-                        flag = False
-                        output += "Error: " + \
-                            str(wife) + " is/was married to multiple people at the same time\n"
-                # Check if husband
+                    innerFlag,out = no_bigamy_spouse_checker(wife, husband, f, f2)
+                    flag = innerFlag and flag
+                    output += out
                 if(husband.ID == f2.husband_ID):
-                    # Spouse is alive and family is not divorced
-                    if husband.alive and f.divorced is None:
-                        flag = False
-                        output += "Error: " + \
-                            str(husband) + \
-                            " is/was married to multiple people at the same time\n"
-                    # If family is divorced check if divorce happened before second marriage
-                    elif((f.divorced is not None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y'))):
-                        flag = False
-                        output += "Error: " + \
-                            str(husband) + \
-                            " is/was married to multiple people at the same time\n"
-                    # If spouse is dead check if death happened before second marriage
-                    elif((wife.death is not None and f2Mar < datetime.strptime(wife.death, '%d %b %Y'))):
-                        flag = False
-                        output += "Error: " + \
-                            str(husband) + \
-                            " is/was married to multiple people at the same time\n"
+                    innerFlag,out = no_bigamy_spouse_checker(husband, wife, f, f2)
+                    flag = innerFlag and flag
+                    output += out
     if flag:
         output += "No one is practicing polygamy\n"
+    return (flag, output)
+
+def no_bigamy_spouse_checker(checked, spouse, f, f2):
+    flag = True
+    output = ""
+    fMar = datetime.strptime(f.married, '%d %b %Y')
+    f2Mar = datetime.strptime(f2.married, '%d %b %Y')
+    if (spouse.alive and f.divorced is None) or (f.divorced is not None and f2Mar < datetime.strptime(f.divorced, '%d %b %Y')) or ((spouse.death is not None and f2Mar < datetime.strptime(spouse.death, '%d %b %Y'))):
+        flag = False
+        output += "Error: " + \
+            str(checked) + " is/was married to multiple people at the same time\n"
     return (flag, output)
 
 
