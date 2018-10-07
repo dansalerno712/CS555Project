@@ -316,7 +316,7 @@ def sibling_spacings(individuals, families):
 
     Returns:
         tuple: Tuple in the form (result, output). If all siblings are born more than 8 months or less than 2 days apart, this returns
-        (True, "All siblings are born more than 8 months or less than 2 days apart"). If all siblings are born more than 8 months or less than 2 days apart, this returns
+        (True, "All siblings are born more than 8 months or less than 2 days apart"). If all siblings are born less than 8 months or more than 2 days apart, this returns
         (False, <a string to output that lists errors>)
     """
     flag = True
@@ -403,6 +403,7 @@ def marriage_after_14(individuals, families):
     Checks to make sure that marriage occurs at least 14 years after birth of both spouses
     (parents must be at least 14 years old)
 
+
     Args:
         individuals (list): List of Individual objects
         families (list): List of Family objects
@@ -423,7 +424,7 @@ def marriage_after_14(individuals, families):
                 if wedding_age.days < (14 * 365):
                     flag = False
                     output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(individual.ID) + " was not above the age of 14.\n"
-    if flag:
+    if flag:2
         output += "All individuals were married above the age of 14.\n"
 
     return (flag, output)
@@ -485,5 +486,25 @@ def birth_before_marriage(individuals, families):
 
 
 
+
+def unique_family_by_spouses(families):
+    """
+    US24
+    Checks that All families have unique wife name, husband name, and marriage date
+        tuple: Tuple in the form (result, output). If All families have unique wife name, husband name, and marriage date, this returns
+        (True, "All families have unique wife name, husband name, and marriage date"). If familes have duplicate wife name, husband name, and marriage date, this returns
+        (False, <a string to output that lists errors>)
+    """
+    flag = True
+    output = ""
+    couples = [(fam.wife_name, fam.husband_name, fam.married) for fam in families]
+    dup_couples = [fam for fam, count in Counter(couples).items() if count >1]
+    if len(dup_couples) > 0:
+        flag = False
+        for c in dup_couples:
+            output+= "Error: " + str(c) + " appear in multiple families\n"
+    if flag:
+        output += "All families have unique wife name, husband name, and marriage date\n"
+    return (flag, output)
 
 

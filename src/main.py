@@ -82,6 +82,9 @@ def main():
     print("User Story 02: Birth before Marriage")
     result, output = Checks.birth_before_marriage(individuals, families)
     print(output)
+    print("User Story 24: Unique family by spouses")
+    result, output = Checks.unique_family_by_spouses(families)
+    print(output)
 
 
 if __name__ == '__main__':
