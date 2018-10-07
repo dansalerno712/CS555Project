@@ -54,6 +54,10 @@ def main():
     result, output = Checks.fewer_than_15_sibilings(families)
     print(output)
 
+    print("User Story 24: Unique family by spouses")
+    result, output = Checks.unique_family_by_spouses(families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

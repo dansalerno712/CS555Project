@@ -291,7 +291,7 @@ def sibling_spacings(individuals, families):
 
     Returns:
         tuple: Tuple in the form (result, output). If all siblings are born more than 8 months or less than 2 days apart, this returns
-        (True, "All siblings are born more than 8 months or less than 2 days apart"). If all siblings are born more than 8 months or less than 2 days apart, this returns
+        (True, "All siblings are born more than 8 months or less than 2 days apart"). If all siblings are born less than 8 months or more than 2 days apart, this returns
         (False, <a string to output that lists errors>)
     """
     flag = True
@@ -348,3 +348,30 @@ def fewer_than_15_sibilings(families):
         output += "All families have less than 15 sibilings"
 
     return (flag, output)
+
+def unique_family_by_spouses(families):
+    """
+    US24
+    Checks that All families have unique wife name, husband name, and marriage date
+    Args:
+        individuals (list): List of Individual objects
+        families (list): List of Family objects
+
+    Returns:
+        tuple: Tuple in the form (result, output). If All families have unique wife name, husband name, and marriage date, this returns
+        (True, "All families have unique wife name, husband name, and marriage date"). If familes have duplicate wife name, husband name, and marriage date, this returns
+        (False, <a string to output that lists errors>)
+    """
+    flag = True
+    output = ""
+    couples = [(fam.wife_name, fam.husband_name, fam.married) for fam in families]
+    dup_couples = [fam for fam, count in Counter(couples).items() if count >1]
+    if len(dup_couples) > 0:
+        flag = False
+        for c in dup_couples:
+            output+= "Error: " + str(c) + " appear in multiple families\n"
+    if flag:
+        output += "All families have unique wife name, husband name, and marriage date\n"
+    return (flag, output)
+
+
