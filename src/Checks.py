@@ -454,3 +454,36 @@ def birth_before_death(individuals, families):
     if flag:
         output += "All individuals have death dates after birthdays.\n"
     return (flag, output)
+
+def birth_before_marriage(individuals, families):
+    """
+    US02
+    Checks to make sure birth of an individual is before their marriage
+    
+    Args:
+    individuals (list): List of Individual objects
+    families (list): List of Family objects
+    
+    Returns:
+    tuple: Tuple in the form (result, output). If all births are before marriage, this returns
+    (True, ""All individuals were born before their marriage.") If individuals have a marriage before
+    their birthday, this returns (False, <a string to output that lists errors>).
+    """
+    flag = True
+    output = ""
+    for family in families:
+        wedding_date = datetime.strptime(family.married, '%d %b %Y')
+        for individual in individuals:
+            birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
+            if individual.ID == family.wife_ID or individual.ID == family.husband_ID:
+                if birth_date > wedding_date:
+                    flag = False
+                    output += "Error: " + str(individual) + " has a marriage before their birth.\n"
+    if flag:
+        output += "All individuals have a birthday before their marriage date.\n"
+    return (flag, output)
+
+
+
+
+
