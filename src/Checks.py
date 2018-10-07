@@ -424,7 +424,7 @@ def marriage_after_14(individuals, families):
                 if wedding_age.days < (14 * 365):
                     flag = False
                     output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(individual.ID) + " was not above the age of 14.\n"
-    if flag:2
+    if flag:
         output += "All individuals were married above the age of 14.\n"
 
     return (flag, output)
