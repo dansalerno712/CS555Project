@@ -210,6 +210,7 @@ def unique_first_names(individuals, families):
         output += "All children in the all families do not have the same names and birth dates."
     return (flag, output)
 
+
 def age_less_than_150(individuals):
     """US 07
     Checks to make sure that an individual is less than 150 years old
@@ -231,10 +232,12 @@ def age_less_than_150(individuals):
             # age = curr_date - birth_date
             if individual.age > 150:
                 flag = False
-                output += "Error: " + str(individual.ID) + " is more than 150 years old.\n"
+                output += "Error: " + \
+                    str(individual.ID) + " is more than 150 years old.\n"
     if flag:
         output += "All individuals are less than 150 years old.\n"
     return (flag, output)
+
 
 def no_bigamy(individuals, families):
     """
@@ -379,6 +382,7 @@ def list_deceased(individuals):
 
     return (flag, output)
 
+
 def marriage_after_14(individuals, families):
     """
     US10
@@ -405,7 +409,8 @@ def marriage_after_14(individuals, families):
                 wedding_age = wedding_date - birth_date
                 if wedding_age.days < (14 * 365):
                     flag = False
-                    output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(individual.ID) + " was not above the age of 14.\n"
+                    output += "Error: " + str(family.ID) + " is not a valid wedding. " + str(
+                        individual.ID) + " was not above the age of 14.\n"
     if flag:
         output += "All individuals were married above the age of 14.\n"
 

@@ -1,6 +1,7 @@
 import sys
 from Parser import parse
 import Checks
+from Utils import pretty_print
 
 
 def main():
@@ -18,13 +19,7 @@ def main():
     individuals.sort(key=lambda x: x.ID)
     families.sort(key=lambda x: x.ID)
 
-    print("=============Individuals==============")
-    for indi in individuals:
-        print(indi)
-
-    print("=============Families==============")
-    for fam in families:
-        print(fam)
+    pretty_print(individuals, families)
 
     print("==============Error/Anomaly Checks============")
     print("User Story 27: Print Age")

@@ -1,4 +1,5 @@
 import datetime
+from prettytable import PrettyTable
 
 # stores the valid tags for each level
 # NOTE: INDI and FAM are not included in the level 0 tags because they are a special case
@@ -68,3 +69,31 @@ def calculate_age(born_string):
     today = datetime.date.today()
     born = datetime.datetime.strptime(born_string, "%d %b %Y").date()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+
+def pretty_print(individuals, families):
+    """Prints all individuals and families in a table using pretty table
+
+    Args:
+        individuals (list): list of Individual objects
+        families (list): list of Family objects
+    """
+    print("==============================Individuals===============================")
+    i_table = PrettyTable()
+    i_table.field_names = ["ID", "Name", "Gender",
+                           "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    for indi in individuals:
+        i_table.add_row([indi.ID, indi.name, indi.gender, indi.birthday,
+                         indi.age, indi.alive, indi.death, indi.child, indi.spouse])
+
+    print(i_table)
+
+    print("==============================Families===============================")
+    f_table = PrettyTable()
+    f_table.field_names = ["ID", "Married", "Divorced", "Husband ID",
+                           "Husband Name", "Wife ID", "Wife Name", "Children"]
+    for fam in families:
+        f_table.add_row([fam.ID, fam.married, fam.divorced, fam.husband_ID,
+                         fam.husband_name, fam.wife_ID, fam.wife_name, fam.children])
+
+    print(f_table)
