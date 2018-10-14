@@ -20,7 +20,7 @@ class TestUS15(unittest.TestCase):
 
     # all tests need to be named test_<name_of_function>
     def test_family_with_too_many_siblings(self):
-        result, output = Checks.fewer_than_15_sibilings(self.families)
+        result, output = Checks.fewer_than_15_siblings(self.families)
         self.assertEqual(result, False)
         self.assertEqual(output,
                          "Error: family {ID: @<US15>F1@| Married: 1 JUN 1975| Divorced: None| Husband ID: @<US15>I16@| Husband Name: Michael /Salerno/| Wife ID: @<US15>I17@| Wife Name: Gail /Salerno/| Children: ['@<US15>I1@', '@<US15>I2@', '@<US15>I3@', '@<US15>I4@', '@<US15>I5@', '@<US15>I6@', '@<US15>I7@', '@<US15>I8@', '@<US15>I9@', '@<US15>I10@', '@<US15>I11@', '@<US15>I12@', '@<US15>I13@', '@<US15>I14@', '@<US15>I15@']} has 15 or more siblings\n")
