@@ -81,6 +81,10 @@ def main():
     result, output = Checks.unique_family_by_spouses(families)
     print(output)
 
+    print("User Story 34: List large age difference")
+    result, output = Checks.list_large_age_difference(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

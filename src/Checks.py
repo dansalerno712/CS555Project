@@ -494,4 +494,44 @@ def unique_family_by_spouses(families):
         output += "All families have unique wife name, husband name, and marriage date\n"
     return (flag, output)
 
+   
+def list_large_age_difference(individuals, families):
+    """
+    US24
+    List all couples who were married when the older spouse was more than twice as old as the younger spouse
+        tuple: Tuple in the form (result, output). If there are no couples with large age diff, this returns
+        (True, "No couples where the older spouse was twice as old as the younger spouse at the time of marriage\n"). 
+        If there are couples with large age diff, this returns
+        (False, <a string to output that lists couples>)
+    """
+    flag = True
+    output = ""
+    for f in families:
+        wife = next(x for x in individuals if x.ID == f.wife_ID)
+        husband = next(x for x in individuals if x.ID == f.husband_ID)
+        wifeAgeMarr = calculate_age_at_spec_date(wife.birthday, f.married)
+        husbAgeMarr = calculate_age_at_spec_date(husband.birthday, f.married)
+        if wifeAgeMarr >= husbAgeMarr * 2:
+            flag = False
+            output+= str(wife) + " and "+str(husband)+"\n"
+        elif husbAgeMarr >= wifeAgeMarr * 2:
+            flag = False
+            output+= str(husband) + " and "+str(wife)+"\n"
 
+    if flag:
+        output += "No couples where the older spouse was twice as old as the younger spouse at the time of marriage\n"
+    return (flag, output)
+
+def calculate_age_at_spec_date(born_string, date_string):
+    """Helper for list_large_age_difference
+        Calculate the age of a person at specific date
+
+    Args:
+        born_string (string): Date string of an Individuals birthday
+        date_string (string): Date string to check age of individual at
+    Returns:
+        int: How many years old the person was at date_string
+    """
+    specDate = datetime.strptime(date_string, "%d %b %Y").date()
+    born = datetime.strptime(born_string, "%d %b %Y").date()
+    return specDate.year - born.year - ((specDate.month, specDate.day) < (born.month, born.day))
