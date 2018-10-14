@@ -58,8 +58,8 @@ def main():
     result, output = Checks.sibling_spacings(individuals, families)
     print(output)
 
-    print("User Story 15: Fewer than 15 sibilings")
-    result, output = Checks.fewer_than_15_sibilings(families)
+    print("User Story 15: Fewer than 15 siblings")
+    result, output = Checks.fewer_than_15_siblings(families)
     print(output)
 
     print("User Story 29: List deceased")

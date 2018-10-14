@@ -335,16 +335,16 @@ def sibling_spacings(individuals, families):
     return (flag, output)
 
 
-def fewer_than_15_sibilings(families):
-    """US 15: Fewer than 15 sibilings
+def fewer_than_15_siblings(families):
+    """US 15: Fewer than 15 siblings
 
     Args:
         families (list): A list of family objects
 
     Returns:
-        tuple: Tuple in the form (result, output). If all families have less than 15 sibilings, output is
-        All families have less than 15 sibilings. Else, output contains the families that have too many
-        sibiling
+        tuple: Tuple in the form (result, output). If all families have less than 15 siblings, output is
+        All families have less than 15 siblings. Else, output contains the families that have too many
+        sibling
     """
     flag = True
     output = ""
@@ -353,10 +353,10 @@ def fewer_than_15_sibilings(families):
         if len(fam.children) >= 15:
             flag = False
             output += "Error: family " + \
-                str(fam) + " has 15 or more sibilings\n"
+                str(fam) + " has 15 or more siblings\n"
 
     if flag:
-        output += "All families have less than 15 sibilings\n"
+        output += "All families have less than 15 siblings\n"
 
     return (flag, output)
 

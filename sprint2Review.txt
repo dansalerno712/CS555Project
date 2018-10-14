@@ -1,0 +1,108 @@
+==============================Individuals===============================
++-------+--------------------+--------+-------------+-----+-------+-------------+----------+------------------+
+|   ID  |        Name        | Gender |   Birthday  | Age | Alive |    Death    |  Child   |      Spouse      |
++-------+--------------------+--------+-------------+-----+-------+-------------+----------+------------------+
+| @I10@ |  Dan10 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+| @I11@ |  Dan11 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+| @I12@ |  Dan12 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+| @I13@ |  Dan13 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+| @I14@ |   Dan /Salerno/    |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+| @I15@ |   Dan /Salerno/    |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+| @I16@ | Michael /Salerno/  |   M    | 13 DEC 1976 |  41 |  True |     None    |    []    |     ['@F1@']     |
+| @I17@ |   Gail /Salerno/   |   F    | 11 SEP 1961 |  57 |  True |     None    |    []    |     ['@F1@']     |
+| @I18@ |   Test /Person/    |   F    | 11 SEP 1961 |  57 |  True |     None    |    []    |     ['@F2@']     |
+| @I19@ |   Test2 /Person/   |   M    | 11 SEP 1961 |  57 |  True |     None    |    []    | ['@F2@', '@F3@'] |
+|  @I1@ |   Dan1 /Salerno/   |   M    | 12 JUL 1867 | 151 |  True |     None    | ['@F1@'] |        []        |
+| @I20@ |   Test3 /Person/   |   F    | 11 SEP 1961 |  57 |  True |     None    |    []    |     ['@F3@']     |
+| @I21@ |   Test4 /Person/   |   F    | 01 JUN 2000 |  18 |  True |     None    | ['@F4@'] |        []        |
+| @I22@ |   Test5 /Person/   |   F    | 05 JUN 2000 |  18 |  True |     None    | ['@F4@'] |        []        |
+| @I23@ |   Test6 /Person/   |   F    | 11 SEP 1961 |  57 | False | 31 DEC 1999 |    []    |     ['@F4@']     |
+| @I24@ |   Test7 /Person/   |   M    | 11 SEP 1961 |  57 |  True |     None    |    []    |     ['@F4@']     |
+| @I25@ |  Test03 /Person/   |   F    | 11 SEP 2000 |  18 | False | 31 DEC 1999 | ['@F4@'] |        []        |
+| @I26@ |   Test2 /Person/   |   M    | 11 SEP 1961 |  57 |  True |     None    |    []    |     ['@F5@']     |
+| @I27@ |   Test3 /Person/   |   F    | 11 SEP 1961 |  57 |  True |     None    |    []    |     ['@F5@']     |
+|  @I2@ |   Dan2 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I3@ |   Dan3 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I4@ |   Dan4 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I5@ |   Dan5 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I6@ |   Dan6 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I7@ |   Dan7 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I8@ |   Dan8 /Salerno/   |   M    | 12 JUL 1996 |  22 |  True |     None    | ['@F1@'] |        []        |
+|  @I9@ |   Dan9 /Salerno/   |   M    | 12 JUL 2020 |  -2 |  True |     None    | ['@F1@'] |        []        |
+| @dup@ | Duplicate /Person/ |   M    | 11 SEP 1961 |  57 |  True |     None    |    []    |        []        |
+| @dup@ | Duplicate /Person/ |   M    | 11 SEP 1961 |  57 |  True |     None    |    []    |        []        |
++-------+--------------------+--------+-------------+-----+-------+-------------+----------+------------------+
+==============================Families===============================
++------+------------+------------+------------+-------------------+---------+----------------+--------------------------------------------------------------------------------------------------------------------------------+
+|  ID  |  Married   |  Divorced  | Husband ID |    Husband Name   | Wife ID |   Wife Name    |                                                            Children                                                            |
++------+------------+------------+------------+-------------------+---------+----------------+--------------------------------------------------------------------------------------------------------------------------------+
+| @F1@ | 1 JUN 1975 |    None    |   @I16@    | Michael /Salerno/ |  @I17@  | Gail /Salerno/ | ['@I1@', '@I2@', '@I3@', '@I4@', '@I5@', '@I6@', '@I7@', '@I8@', '@I9@', '@I10@', '@I11@', '@I12@', '@I13@', '@I14@', '@I15@'] |
+| @F2@ | 2 JUN 1975 |    None    |   @I19@    |   Test2 /Person/  |  @I18@  | Test /Person/  |                                                               []                                                               |
+| @F3@ | 1 JUN 1975 |    None    |   @I19@    |   Test2 /Person/  |  @I20@  | Test3 /Person/ |                                                               []                                                               |
+| @F4@ | 1 JUN 1975 | 1 JUN 1974 |   @I24@    |   Test7 /Person/  |  @I23@  | Test6 /Person/ |                                                  ['@I21@', '@I22@', '@I25@']                                                   |
+| @F5@ | 1 JUN 1975 |    None    |   @I26@    |   Test2 /Person/  |  @I27@  | Test3 /Person/ |                                                               []                                                               |
++------+------------+------------+------------+-------------------+---------+----------------+--------------------------------------------------------------------------------------------------------------------------------+
+==============Error/Anomaly Checks============
+User Story 27: Print Age
+{ID: @I10@| Name: Dan10 /Salerno/| Gender: M| Birthday: 12 JUL 1996| Age: 22| Alive: True| Death: None| Child: ['@F1@']| Spouse: []}
+()
+User Story 22: Unique IDs
+Error: {ID: @dup@| Name: Duplicate /Person/| Gender: M| Birthday: 11 SEP 1961| Age: 57| Alive: True| Death: None| Child: []| Spouse: []} has a non-unique ID
+Error: {ID: @dup@| Name: Duplicate /Person/| Gender: M| Birthday: 11 SEP 1961| Age: 57| Alive: True| Death: None| Child: []| Spouse: []} has a non-unique ID
+
+User Story 04: Marriage Before Divorce
+Error: {ID: @F4@| Married: 1 JUN 1975| Divorced: 1 JUN 1974| Husband ID: @I24@| Husband Name: Test7 /Person/| Wife ID: @I23@| Wife Name: Test6 /Person/| Children: ['@I21@', '@I22@', '@I25@']} has a divorce before a marriage
+
+User Story 01: Dates Before Current Date
+Error: {ID: @I9@| Name: Dan9 /Salerno/| Gender: M| Birthday: 12 JUL 2020| Age: -2| Alive: True| Death: None| Child: ['@F1@']| Spouse: []} has a birth after current date.
+
+User Story 09: Birth Before the Death of Parents
+Error: {ID: @F4@| Married: 1 JUN 1975| Divorced: 1 JUN 1974| Husband ID: @I24@| Husband Name: Test7 /Person/| Wife ID: @I23@| Wife Name: Test6 /Person/| Children: ['@I21@', '@I22@', '@I25@']} has a child @I21@ born after the mother's death.
+Error: {ID: @F4@| Married: 1 JUN 1975| Divorced: 1 JUN 1974| Husband ID: @I24@| Husband Name: Test7 /Person/| Wife ID: @I23@| Wife Name: Test6 /Person/| Children: ['@I21@', '@I22@', '@I25@']} has a child @I22@ born after the mother's death.
+Error: {ID: @F4@| Married: 1 JUN 1975| Divorced: 1 JUN 1974| Husband ID: @I24@| Husband Name: Test7 /Person/| Wife ID: @I23@| Wife Name: Test6 /Person/| Children: ['@I21@', '@I22@', '@I25@']} has a child @I25@ born after the mother's death.
+
+User Story 25: Unique First Names in Families
+Error: {ID: @F1@| Married: 1 JUN 1975| Divorced: None| Husband ID: @I16@| Husband Name: Michael /Salerno/| Wife ID: @I17@| Wife Name: Gail /Salerno/| Children: ['@I1@', '@I2@', '@I3@', '@I4@', '@I5@', '@I6@', '@I7@', '@I8@', '@I9@', '@I10@', '@I11@', '@I12@', '@I13@', '@I14@', '@I15@']}{ID: @I14@| Name: Dan /Salerno/| Gender: M| Birthday: 12 JUL 1996| Age: 22| Alive: True| Death: None| Child: ['@F1@']| Spouse: []} has children, {ID: @I15@| Name: Dan /Salerno/| Gender: M| Birthday: 12 JUL 1996| Age: 22| Alive: True| Death: None| Child: ['@F1@']| Spouse: []}, with the same first name and birthday.
+
+User Story 07: Less than 150 years old
+Error: @I1@ is more than 150 years old.
+
+User Story 11: No bigamy
+Error: {ID: @I19@| Name: Test2 /Person/| Gender: M| Birthday: 11 SEP 1961| Age: 57| Alive: True| Death: None| Child: []| Spouse: ['@F2@', '@F3@']} is/was married to multiple people at the same time
+
+User Story 13: Sibling spacings
+Error: {ID: @I21@| Name: Test4 /Person/| Gender: F| Birthday: 01 JUN 2000| Age: 18| Alive: True| Death: None| Child: ['@F4@']| Spouse: []} and {ID: @I22@| Name: Test5 /Person/| Gender: F| Birthday: 05 JUN 2000| Age: 18| Alive: True| Death: None| Child: ['@F4@']| Spouse: []} are less than 8 months and more than 2 days apart.
+Error: {ID: @I21@| Name: Test4 /Person/| Gender: F| Birthday: 01 JUN 2000| Age: 18| Alive: True| Death: None| Child: ['@F4@']| Spouse: []} and {ID: @I25@| Name: Test03 /Person/| Gender: F| Birthday: 11 SEP 2000| Age: 18| Alive: False| Death: 31 DEC 1999| Child: ['@F4@']| Spouse: []} are less than 8 months and more than 2 days apart.
+Error: {ID: @I22@| Name: Test5 /Person/| Gender: F| Birthday: 05 JUN 2000| Age: 18| Alive: True| Death: None| Child: ['@F4@']| Spouse: []} and {ID: @I25@| Name: Test03 /Person/| Gender: F| Birthday: 11 SEP 2000| Age: 18| Alive: False| Death: 31 DEC 1999| Child: ['@F4@']| Spouse: []} are less than 8 months and more than 2 days apart.
+
+User Story 15: Fewer than 15 siblings
+Error: family {ID: @F1@| Married: 1 JUN 1975| Divorced: None| Husband ID: @I16@| Husband Name: Michael /Salerno/| Wife ID: @I17@| Wife Name: Gail /Salerno/| Children: ['@I1@', '@I2@', '@I3@', '@I4@', '@I5@', '@I6@', '@I7@', '@I8@', '@I9@', '@I10@', '@I11@', '@I12@', '@I13@', '@I14@', '@I15@']} has 15 or more siblings
+
+User Story 29: List deceased
+{ID: @I23@| Name: Test6 /Person/| Gender: F| Birthday: 11 SEP 1961| Age: 57| Alive: False| Death: 31 DEC 1999| Child: []| Spouse: ['@F4@']}
+{ID: @I25@| Name: Test03 /Person/| Gender: F| Birthday: 11 SEP 2000| Age: 18| Alive: False| Death: 31 DEC 1999| Child: ['@F4@']| Spouse: []}
+
+User Story 10: Marriage after 14
+Error: @F1@ is not a valid wedding. @I16@ was not above the age of 14.
+Error: @F1@ is not a valid wedding. @I17@ was not above the age of 14.
+Error: @F2@ is not a valid wedding. @I18@ was not above the age of 14.
+Error: @F2@ is not a valid wedding. @I19@ was not above the age of 14.
+Error: @F3@ is not a valid wedding. @I19@ was not above the age of 14.
+Error: @F3@ is not a valid wedding. @I20@ was not above the age of 14.
+Error: @F4@ is not a valid wedding. @I23@ was not above the age of 14.
+Error: @F4@ is not a valid wedding. @I24@ was not above the age of 14.
+Error: @F5@ is not a valid wedding. @I26@ was not above the age of 14.
+Error: @F5@ is not a valid wedding. @I27@ was not above the age of 14.
+
+User Story 03: Birth before Death
+Error: {ID: @I25@| Name: Test03 /Person/| Gender: F| Birthday: 11 SEP 2000| Age: 18| Alive: False| Death: 31 DEC 1999| Child: ['@F4@']| Spouse: []} has a death date before their birthday.
+
+User Story 02: Birth before Marriage
+Error: {ID: @I16@| Name: Michael /Salerno/| Gender: M| Birthday: 13 DEC 1976| Age: 41| Alive: True| Death: None| Child: []| Spouse: ['@F1@']} has a marriage before their birth.
+
+User Story 24: Unique family by spouses
+Error: ('Test3 /Person/', 'Test2 /Person/', '1 JUN 1975') appear in multiple families
+
+User Story 34: List large age difference
+{ID: @I17@| Name: Gail /Salerno/| Gender: F| Birthday: 11 SEP 1961| Age: 57| Alive: True| Death: None| Child: []| Spouse: ['@F1@']} and {ID: @I16@| Name: Michael /Salerno/| Gender: M| Birthday: 13 DEC 1976| Age: 41| Alive: True| Death: None| Child: []| Spouse: ['@F1@']}
+
