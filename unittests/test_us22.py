@@ -22,14 +22,14 @@ class TestUS22(unittest.TestCase):
     # all tests need to be named test_<name_of_function>
     def test_unique_IDs_all_good(self):
         # remove the duplicate individuals and families
-        self.individuals[0].ID = "@I1@"
-        self.families[1].ID = "@F2@"
+        self.individuals[0].ID = "@<US22>I1@"
+        self.families[1].ID = "@<US22>F2@"
         result, output = Checks.unique_IDs(self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(output, "All IDs are unique")
         # put things back
-        self.individuals[0].ID = "@I2@"
-        self.families[1].ID = "@F3@"
+        self.individuals[0].ID = "@<US22>I2@"
+        self.families[1].ID = "@<US22>F3@"
 
     def test_unique_IDs_bad_individuals_and_families(self):
         result, output = Checks.unique_IDs(self.individuals, self.families)
@@ -42,8 +42,8 @@ class TestUS22(unittest.TestCase):
 
     def test_unique_IDs_bad_individuals(self):
         # edit things
-        self.families[1].ID = "@F2@"
-        self.individuals[2].ID = "@I2@"
+        self.families[1].ID = "@<US22>F2@"
+        self.individuals[2].ID = "@<US22>I2@"
         result, output = Checks.unique_IDs(self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
@@ -51,13 +51,13 @@ class TestUS22(unittest.TestCase):
             "Error: " + str(self.individuals[1]) + " has a non-unique ID\n" +
             "Error: " + str(self.individuals[2]) + " has a non-unique ID\n")
         # put them back
-        self.families[1].ID = "@F3@"
-        self.individuals[2].ID = "@I3@"
+        self.families[1].ID = "@<US22>F3@"
+        self.individuals[2].ID = "@<US22>I3@"
 
     def test_unique_IDs_bad_families(self):
         # edit things
-        self.families[0].ID = "@F3@"
-        self.individuals[0].ID = "@I1@"
+        self.families[0].ID = "@<US22>F3@"
+        self.individuals[0].ID = "@<US22>I1@"
         result, output = Checks.unique_IDs(self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
@@ -65,8 +65,8 @@ class TestUS22(unittest.TestCase):
             "Error: " + str(self.families[1]) + " has a non-unique ID\n" +
             "Error: " + str(self.families[2]) + " has a non-unique ID\n")
         # put things back
-        self.families[0].ID = "@F1@"
-        self.individuals[0].ID = "@I2@"
+        self.families[0].ID = "@<US22>F1@"
+        self.individuals[0].ID = "@<US22>I2@"
 
     def test_unique_IDs_empty_inputs(self):
         # edit things

@@ -23,7 +23,7 @@ class TestUS15(unittest.TestCase):
         result, output = Checks.fewer_than_15_sibilings(self.families)
         self.assertEqual(result, False)
         self.assertEqual(output,
-                         "Error: family {ID: @F1@| Married: 1 JUN 1975| Divorced: None| Husband ID: @I16@| Husband Name: Michael /Salerno/| Wife ID: @I17@| Wife Name: Gail /Salerno/| Children: ['@I1@', '@I2@', '@I3@', '@I4@', '@I5@', '@I6@', '@I7@', '@I8@', '@I9@', '@I10@', '@I11@', '@I12@', '@I13@', '@I14@', '@I15@']} has 15 or more sibilings\n")
+                         "Error: family {ID: @<US15>F1@| Married: 1 JUN 1975| Divorced: None| Husband ID: @<US15>I16@| Husband Name: Michael /Salerno/| Wife ID: @<US15>I17@| Wife Name: Gail /Salerno/| Children: ['@<US15>I1@', '@<US15>I2@', '@<US15>I3@', '@<US15>I4@', '@<US15>I5@', '@<US15>I6@', '@<US15>I7@', '@<US15>I8@', '@<US15>I9@', '@<US15>I10@', '@<US15>I11@', '@<US15>I12@', '@<US15>I13@', '@<US15>I14@', '@<US15>I15@']} has 15 or more sibilings\n")
 
     def test_good_family(self):
         # make family good size

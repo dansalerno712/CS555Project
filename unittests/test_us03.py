@@ -9,7 +9,7 @@ from Parser import parse
 import Checks
 
 
-class TestUS01(unittest.TestCase):
+class TestUS03(unittest.TestCase):
     # make sure to name the class Test<US#>
 
     # setup gets run before tests, so I use it to parse my test file and get the
