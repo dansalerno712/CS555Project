@@ -2,6 +2,7 @@
 from collections import Counter
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from Utils import calculate_age_at_spec_date
 
 
 def unique_IDs(individuals, families):
@@ -225,7 +226,6 @@ def age_less_than_150(individuals):
     """
     flag = True
     output = ""
-    curr_date = datetime.now()
     for individual in individuals:
         if individual.alive:
             # birth_date = datetime.strptime(individual.birthday, '%d %b %Y')
@@ -268,16 +268,19 @@ def no_bigamy(individuals, families):
             # Make sure second marriage happend after original
             if(f2Mar > fMar):
                 if(wife.ID == f2.wife_ID):
-                    innerFlag,out = no_bigamy_spouse_checker(wife, husband, f, f2)
+                    innerFlag, out = no_bigamy_spouse_checker(
+                        wife, husband, f, f2)
                     flag = innerFlag and flag
                     output += out
                 if(husband.ID == f2.husband_ID):
-                    innerFlag,out = no_bigamy_spouse_checker(husband, wife, f, f2)
+                    innerFlag, out = no_bigamy_spouse_checker(
+                        husband, wife, f, f2)
                     flag = innerFlag and flag
                     output += out
     if flag:
         output += "No one is practicing polygamy\n"
     return (flag, output)
+
 
 def no_bigamy_spouse_checker(checked, spouse, f, f2):
     flag = True
@@ -416,15 +419,16 @@ def marriage_after_14(individuals, families):
 
     return (flag, output)
 
+
 def birth_before_death(individuals, families):
     """
     US03
     Checks to make sure birth of an individual is before their death
-    
+
     Args:
     individuals (list): List of Individual objects
     families (list): List of Family objects
-    
+
     Returns:
     tuple: Tuple in the form (result, output). If all births are before deaths, this returns
     (True, ""All individuals were born before their death.") If individuals have a death before
@@ -433,25 +437,27 @@ def birth_before_death(individuals, families):
     flag = True
     output = ""
     for individual in individuals:
-        if individual.death != None:
+        if individual.death is not None:
             death = datetime.strptime(individual.death, '%d %b %Y')
             birth = datetime.strptime(individual.birthday, '%d %b %Y')
             if death < birth:
                 flag = False
-                output += "Error: " + str(individual) + " has a death date before their birthday.\n"
+                output += "Error: " + \
+                    str(individual) + " has a death date before their birthday.\n"
     if flag:
         output += "All individuals have death dates after birthdays.\n"
     return (flag, output)
+
 
 def birth_before_marriage(individuals, families):
     """
     US02
     Checks to make sure birth of an individual is before their marriage
-    
+
     Args:
     individuals (list): List of Individual objects
     families (list): List of Family objects
-    
+
     Returns:
     tuple: Tuple in the form (result, output). If all births are before marriage, this returns
     (True, ""All individuals were born before their marriage.") If individuals have a marriage before
@@ -466,12 +472,11 @@ def birth_before_marriage(individuals, families):
             if individual.ID == family.wife_ID or individual.ID == family.husband_ID:
                 if birth_date > wedding_date:
                     flag = False
-                    output += "Error: " + str(individual) + " has a marriage before their birth.\n"
+                    output += "Error: " + \
+                        str(individual) + " has a marriage before their birth.\n"
     if flag:
         output += "All individuals have a birthday before their marriage date.\n"
     return (flag, output)
-
-
 
 
 def unique_family_by_spouses(families):
@@ -484,23 +489,24 @@ def unique_family_by_spouses(families):
     """
     flag = True
     output = ""
-    couples = [(fam.wife_name, fam.husband_name, fam.married) for fam in families]
-    dup_couples = [fam for fam, count in Counter(couples).items() if count >1]
+    couples = [(fam.wife_name, fam.husband_name, fam.married)
+               for fam in families]
+    dup_couples = [fam for fam, count in Counter(couples).items() if count > 1]
     if len(dup_couples) > 0:
         flag = False
         for c in dup_couples:
-            output+= "Error: " + str(c) + " appear in multiple families\n"
+            output += "Error: " + str(c) + " appear in multiple families\n"
     if flag:
         output += "All families have unique wife name, husband name, and marriage date\n"
     return (flag, output)
 
-   
+
 def list_large_age_difference(individuals, families):
     """
     US24
     List all couples who were married when the older spouse was more than twice as old as the younger spouse
         tuple: Tuple in the form (result, output). If there are no couples with large age diff, this returns
-        (True, "No couples where the older spouse was twice as old as the younger spouse at the time of marriage\n"). 
+        (True, "No couples where the older spouse was twice as old as the younger spouse at the time of marriage\n").
         If there are couples with large age diff, this returns
         (False, <a string to output that lists couples>)
     """
@@ -513,25 +519,42 @@ def list_large_age_difference(individuals, families):
         husbAgeMarr = calculate_age_at_spec_date(husband.birthday, f.married)
         if wifeAgeMarr >= husbAgeMarr * 2:
             flag = False
-            output+= str(wife) + " and "+str(husband)+"\n"
+            output += str(wife) + " and " + str(husband) + "\n"
         elif husbAgeMarr >= wifeAgeMarr * 2:
             flag = False
-            output+= str(husband) + " and "+str(wife)+"\n"
+            output += str(husband) + " and " + str(wife) + "\n"
 
     if flag:
         output += "No couples where the older spouse was twice as old as the younger spouse at the time of marriage\n"
     return (flag, output)
 
-def calculate_age_at_spec_date(born_string, date_string):
-    """Helper for list_large_age_difference
-        Calculate the age of a person at specific date
+
+def list_recent_births(individuals):
+    """US 35: List recent births
 
     Args:
-        born_string (string): Date string of an Individuals birthday
-        date_string (string): Date string to check age of individual at
+        individuals (list): A list of inidividuals
+
     Returns:
-        int: How many years old the person was at date_string
+        tuple: Tuple of the form (bool, output). Bool is True if nobody has been born in the last 30 days,
+        False otherwise. Output is a string that describes which individuals were born in the last 30 days
     """
-    specDate = datetime.strptime(date_string, "%d %b %Y").date()
-    born = datetime.strptime(born_string, "%d %b %Y").date()
-    return specDate.year - born.year - ((specDate.month, specDate.day) < (born.month, born.day))
+    flag = True
+    output = ""
+    # todays datetime
+    today = datetime.now()
+    for indi in individuals:
+        # parse birthday into datetime
+        born = datetime.strptime(indi.birthday, "%d %b %Y")
+        # get difference
+        delta = today - born
+
+        # also need to make sure the baby isnt born in the future
+        if delta.days <= 30 and delta.days >= 0:
+            flag = False
+            output += str(indi) + " was born within the last 30 days\n"
+
+    if flag:
+        output = "No individuals born in the last 30 days\n"
+
+    return (flag, output)
