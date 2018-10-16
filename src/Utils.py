@@ -97,3 +97,18 @@ def pretty_print(individuals, families):
                          fam.husband_name, fam.wife_ID, fam.wife_name, fam.children])
 
     print(f_table)
+
+
+def calculate_age_at_spec_date(born_string, date_string):
+    """Helper for list_large_age_difference
+        Calculate the age of a person at specific date
+
+    Args:
+        born_string (string): Date string of an Individuals birthday
+        date_string (string): Date string to check age of individual at
+    Returns:
+        int: How many years old the person was at date_string
+    """
+    specDate = datetime.datetime.strptime(date_string, "%d %b %Y").date()
+    born = datetime.datetime.strptime(born_string, "%d %b %Y").date()
+    return specDate.year - born.year - ((specDate.month, specDate.day) < (born.month, born.day))

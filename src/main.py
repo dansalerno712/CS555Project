@@ -85,6 +85,10 @@ def main():
     result, output = Checks.list_large_age_difference(individuals, families)
     print(output)
 
+    print("User Story 35: List recent births")
+    result, output = Checks.list_recent_births(individuals)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
