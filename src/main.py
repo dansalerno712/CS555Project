@@ -89,6 +89,10 @@ def main():
     result, output = Checks.list_recent_births(individuals)
     print(output)
 
+    print("User Story 36: List recent deaths")
+    result, output = Checks.list_recent_deaths(individuals)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

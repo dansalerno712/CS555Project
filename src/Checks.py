@@ -558,3 +558,36 @@ def list_recent_births(individuals):
         output = "No individuals born in the last 30 days\n"
 
     return (flag, output)
+
+
+def list_recent_deaths(individuals):
+    """US 35: List recent deaths
+
+    Args:
+        individuals (list): A list of inidividuals
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if nobody has died in the last 30 days,
+        False otherwise. Output is a string that describes which individuals died in the last 30 days
+    """
+    flag = True
+    output = ""
+    # todays datetime
+    today = datetime.now()
+    for indi in individuals:
+        # check to make sure they are dead
+        if not indi.alive and indi.death is not None:
+            # parse birthday into datetime
+            death = datetime.strptime(indi.death, "%d %b %Y")
+            # get difference
+            delta = today - death
+
+            # also need to make sure the baby isnt born in the future
+            if delta.days <= 30 and delta.days >= 0:
+                flag = False
+                output += str(indi) + " died within the last 30 days\n"
+
+    if flag:
+        output = "No individuals died in the last 30 days\n"
+
+    return (flag, output)
