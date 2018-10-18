@@ -97,6 +97,10 @@ def main():
     result, output = Checks.siblings_should_not_marry(individuals, families)
     print(output)
 
+    print("User Story 39: List upcoming anniversaries")
+    result, output = Checks.list_upcoming_anniversaries(families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

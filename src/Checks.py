@@ -614,3 +614,31 @@ def siblings_should_not_marry(individuals, families):
     if flag:
         output = "No siblings are married\n"
     return (flag, output)
+
+def list_upcoming_anniversaries(families):
+    """US 39: List upcoming anniversaries
+
+    Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if there are no living couples with anniversaries in the next 30 days,
+        False otherwise. Output is a string that describes which living couples have anniversaries in the next 30 days.
+    """
+    flag = True
+    output = ""
+    today = datetime.now()
+    for family in families:
+        marriage = datetime.strptime(family.married, "%d %b %Y")
+        #puts marriage into the current year to calculate anniversary
+        marriage = marriage.replace(year = today.year)
+        delta = marriage - today
+        if delta.days <= 30 and delta.days >= 0:
+            flag = False
+            output += "Note: " + str(family.ID) + " has an upcoming anniversary on " + str(family.married) + "\n"
+
+    if flag:
+        output = "No living couples have anniversaries in the next 30 days.\n"
+
+    return (flag, output)
