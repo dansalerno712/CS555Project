@@ -93,6 +93,10 @@ def main():
     result, output = Checks.list_recent_deaths(individuals)
     print(output)
 
+    print("User Story 18: Siblings should not marry")
+    result, output = Checks.siblings_should_not_marry(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

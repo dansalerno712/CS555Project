@@ -591,3 +591,26 @@ def list_recent_deaths(individuals):
         output = "No individuals died in the last 30 days\n"
 
     return (flag, output)
+
+def siblings_should_not_marry(individuals, families):
+    """US 18: Siblings Should Not Marry
+
+    Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if no siblings have married,
+        False otherwise. Output is a string that describes which individuals married their siblings.
+    """
+    flag = True
+    output = ""
+    for family in families:
+        husband = [indi for indi in individuals if indi.ID == family.husband_ID]
+        wife = [indi for indi in individuals if indi.ID == family.wife_ID]
+        if not set(husband[0].child).isdisjoint(wife[0].child):
+            flag = False
+            output += "Error: " + str(husband[0].ID) + " and " + str(wife[0].ID) + " are siblings and should not marry.\n"
+    if flag:
+        output = "No siblings are married\n"
+    return (flag, output)
