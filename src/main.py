@@ -98,7 +98,7 @@ def main():
     print(output)
 
     print("User Story 39: List upcoming anniversaries")
-    result, output = Checks.list_upcoming_anniversaries(families)
+    result, output = Checks.list_upcoming_anniversaries(individuals, families)
     print(output)
 
 

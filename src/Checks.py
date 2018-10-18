@@ -615,7 +615,7 @@ def siblings_should_not_marry(individuals, families):
         output = "No siblings are married\n"
     return (flag, output)
 
-def list_upcoming_anniversaries(families):
+def list_upcoming_anniversaries(individuals, families):
     """US 39: List upcoming anniversaries
 
     Args:
@@ -630,15 +630,15 @@ def list_upcoming_anniversaries(families):
     output = ""
     today = datetime.now()
     for family in families:
+        husband = [indi for indi in individuals if indi.ID == family.husband_ID]
+        wife = [indi for indi in individuals if indi.ID == family.wife_ID]
         marriage = datetime.strptime(family.married, "%d %b %Y")
         #puts marriage into the current year to calculate anniversary
         marriage = marriage.replace(year = today.year)
         delta = marriage - today
-        if delta.days <= 30 and delta.days >= 0:
+        if husband[0].alive and wife[0].alive and delta.days <= 30 and delta.days >= 0:
             flag = False
             output += "Note: " + str(family.ID) + " has an upcoming anniversary on " + str(family.married) + "\n"
-
     if flag:
         output = "No living couples have anniversaries in the next 30 days.\n"
-
     return (flag, output)

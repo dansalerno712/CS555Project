@@ -23,7 +23,7 @@ class TestUS39(unittest.TestCase):
     # all tests need to be named test_<name_of_function>
     def test_no_upcoming_anniversaries(self):
         # remove the duplicate individuals and families
-        result, output = Checks.list_upcoming_anniversaries(self.families)
+        result, output = Checks.list_upcoming_anniversaries(self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(output, "No living couples have anniversaries in the next 30 days.\n")
         
@@ -31,7 +31,7 @@ class TestUS39(unittest.TestCase):
     def test_one_upcoming_anniversary(self):
         self.families[0].married = "31 OCT 2018"
         self.families[0].divorced = "None"
-        result, output = Checks.list_upcoming_anniversaries(self.families)
+        result, output = Checks.list_upcoming_anniversaries(self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
             output, "Note: " + str(self.families[0].ID) + " has an upcoming anniversary on " + str(self.families[0].married) +"\n")
@@ -42,7 +42,7 @@ class TestUS39(unittest.TestCase):
     def test_one_upcoming_anniversary_different_year(self):
         self.families[0].married = "31 OCT 2016"
         self.families[0].divorced = "None"
-        result, output = Checks.list_upcoming_anniversaries(self.families)
+        result, output = Checks.list_upcoming_anniversaries(self.individuals, self.families)
         self.assertEqual(result, False)
         self.assertEqual(
             output, "Note: " + str(self.families[0].ID) + " has an upcoming anniversary on " + str(self.families[0].married) +"\n")
@@ -51,7 +51,7 @@ class TestUS39(unittest.TestCase):
         self.families[0].divorced = "3 MAR 1967"
 
     def test_empty_input(self):
-        flag, output = Checks.list_upcoming_anniversaries([])
+        flag, output = Checks.list_upcoming_anniversaries([], [])
         self.assertEqual(flag, True)
         self.assertEqual(output, "No living couples have anniversaries in the next 30 days.\n")
         individuals, families = parse("../testfiles/US39_test.ged")
