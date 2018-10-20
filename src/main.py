@@ -101,6 +101,9 @@ def main():
     result, output = Checks.list_upcoming_anniversaries(individuals, families)
     print(output)
 
+    print("User Story 30: List living married")
+    result, output = Checks.list_living_married(individuals, families)
+    print(output)
 
 if __name__ == '__main__':
     main()

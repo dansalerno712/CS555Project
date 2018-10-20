@@ -642,3 +642,26 @@ def list_upcoming_anniversaries(individuals, families):
     if flag:
         output = "No living couples have anniversaries in the next 30 days.\n"
     return (flag, output)
+
+def list_living_married(individuals, families):
+    """US 30: List living married
+        
+        Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+        
+        Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if there are no living married couples,
+        False otherwise. Output is a string that describes the living married couples.
+    """
+    flag = True
+    output = ""
+    for family in families:
+        husband = [indi for indi in individuals if indi.ID == family.husband_ID]
+        wife = [indi for indi in individuals if indi.ID == family.wife_ID]
+        if husband != [] and wife != [] and husband[0].alive and wife[0].alive:
+            flag = False
+            output += "Husband: " + str(husband[0].ID) + ", Wife: " + str(wife[0].ID) + "\n"
+    if flag:
+        output = "No living married couples.\n"
+    return (flag, output)
