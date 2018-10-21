@@ -105,5 +105,9 @@ def main():
     result, output = Checks.list_living_married(individuals, families)
     print(output)
 
+    print("User Story 23: Unique name and birth date")
+    result, output = Checks.unique_name_birth(individuals, families)
+    print(output)
+
 if __name__ == '__main__':
     main()

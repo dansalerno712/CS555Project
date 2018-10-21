@@ -665,3 +665,34 @@ def list_living_married(individuals, families):
     if flag:
         output = "No living married couples.\n"
     return (flag, output)
+
+def unique_name_birth(individuals, families):
+    """US 23: Unique name and birth date
+        
+        Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+        
+        Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if all names and birth dates are unique.
+        False otherwise. Output is a string that lists all individuals with non-unique names and birth dates.
+    """
+    flag = True
+    output = ""
+    everyone = {}
+    for individual in individuals:
+        name = individual.name
+        birthday = individual.birthday
+        if (name, birthday) in everyone:
+            flag = False
+            everyone[(name,birthday)] += [individual.ID]
+        else:
+            everyone[(name,birthday)] = [individual.ID]
+    if flag:
+        output = "All unique names and birth dates.\n"
+    else:
+        for key in everyone:
+            if len(everyone[key]) > 1:
+                same = " ".join(everyone[key])
+                output += same + " have the same name and birth date.\n"
+    return (flag, output)
