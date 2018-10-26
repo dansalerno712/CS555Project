@@ -109,5 +109,8 @@ def main():
     result, output = Checks.unique_name_birth(individuals, families)
     print(output)
 
+    print("User Story 20: Aunts and Uncles")
+    result, output = Checks.aunts_and_uncles(individuals, families)
+    print(output)
 if __name__ == '__main__':
     main()
