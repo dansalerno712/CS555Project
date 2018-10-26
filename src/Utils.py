@@ -112,3 +112,43 @@ def calculate_age_at_spec_date(born_string, date_string):
     specDate = datetime.datetime.strptime(date_string, "%d %b %Y").date()
     born = datetime.datetime.strptime(born_string, "%d %b %Y").date()
     return specDate.year - born.year - ((specDate.month, specDate.day) < (born.month, born.day))
+
+def get_siblings(indi, individuals, families):
+    """
+     Args:
+        indi (individual): individual to lookup
+        individuals (list): list of individuals
+        families (list): list of families
+    Returns:
+        list: list of siblings of indi
+    """
+    siblings_ID = next((fam.children for fam  in families if indi.ID in fam.children), [])
+    return [i for i in individuals if i.ID in siblings_ID]
+
+def get_children(indi, individuals, families):
+    """
+     Args:
+        indi (individual): individual to lookup
+        individuals (list): list of individuals
+        families (list): list of families
+    Returns:
+        list: list of children of indi
+    """
+    children_ID =  next((fam.children for fam  in families if indi.ID == fam.husband_ID or indi.ID == fam.wife_ID), [])
+    return [i for i in individuals if i.ID in children_ID]
+
+def get_spouses(indi, individuals, families):
+    """
+     Args:
+        indi (individual): individual to lookup
+        individuals (list): list of individuals
+        families (list): list of families
+    Returns:
+        list: list of spouses of indi
+    """
+    if(indi.gender == 'F'):
+        spouses_ID = [fam.husband_ID for fam  in families if fam.ID in indi.spouse]
+        return [i for i in individuals if i.ID in spouses_ID]
+    else:
+        spouses_ID = [fam.wife_ID for fam  in families if fam.ID in indi.spouse]
+        return [i for i in individuals if i.ID in spouses_ID]

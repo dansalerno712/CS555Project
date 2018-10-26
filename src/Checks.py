@@ -2,7 +2,7 @@
 from collections import Counter
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from Utils import calculate_age_at_spec_date
+from Utils import calculate_age_at_spec_date, get_children, get_siblings, get_spouses
 
 
 def unique_IDs(individuals, families):
@@ -705,8 +705,8 @@ def aunts_and_uncles(individuals, families):
         families (list): A list of families
         
         Returns:
-        tuple: Tuple of the form (bool, output). Bool is True if all names and birth dates are unique.
-        False otherwise. Output is a string that lists all individuals with non-unique names and birth dates.
+        tuple: Tuple of the form (bool, output). Bool is True if No aunts or uncles are married to nieces or nephews.
+        False otherwise. Output is a string that lists all individuals who are married to a niece or nephew.
     """
     flag = True
     output = ""
@@ -715,28 +715,12 @@ def aunts_and_uncles(individuals, families):
         parent_siblings =  get_siblings(i, individuals, families)
         children = get_children(i, individuals, families)
         for c in children:
-            kid_spouses = get_spouses(i, individuals, families)
+            kid_spouses = get_spouses(c, individuals, families)
             creeps = list(set(parent_siblings).intersection(set(kid_spouses)))
             if(len(creeps) > 0):
                 for cr in creeps:
                     flag = False
                     output+=  "Error: " + str(cr) + " is married to their niece or nephew.\n"
     if flag:
-        output += "All unique names and birth dates.\n"
+        output += "No aunts or uncles are married to nieces or nephews.\n"
     return (flag, output)
-
-def get_siblings(indi, individuals, families):
-    siblings_ID = next((fam.children for fam  in families if indi.ID in fam.children), [])
-    return [i for i in individuals if i.ID in siblings_ID]
-
-def get_children(indi, individuals, families):
-    children_ID =  next((fam.children for fam  in families if fam.ID in indi.child), [])
-    return [i for i in individuals if i.ID in children_ID]
-
-def get_spouses(indi, individuals, families):
-    if(indi.gender == 'F'):
-        spouses_ID = [fam.husband_ID for fam  in families if fam.ID in indi.spouse]
-        return [i for i in individuals if i.ID in spouses_ID]
-    else:
-        spouses_ID = [fam.wife_ID for fam  in families if fam.ID in indi.spouse]
-        return [i for i in individuals if i.ID in spouses_ID]
