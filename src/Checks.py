@@ -724,3 +724,24 @@ def aunts_and_uncles(individuals, families):
     if flag:
         output += "No aunts or uncles are married to nieces or nephews.\n"
     return (flag, output)
+
+def living_single(individuals):
+    """US 31: Living single 
+        
+        Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+        
+        Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if No one is single and over 30.
+        False otherwise. Output is a string that lists all individuals who single and over 30.
+    """
+    flag = True
+    output = ""
+    for i in individuals:
+        if(i.age > 30 and len(i.spouse) == 0):
+            flag = False
+            output+=   str(i) + " is single and over 30.\n"
+    if flag:
+        output += "No one is single and over 30.\n"
+    return (flag, output)
