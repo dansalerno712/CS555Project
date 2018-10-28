@@ -30,7 +30,7 @@ class TestUS25(unittest.TestCase):
             self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
-            output, "All children in the all families do not have the same names and birth dates.")
+            output, "All children in the all families do not have the same names and birth dates.\n")
         # put things back
         self.individuals[0].name = "Jennifer Cafiero"
         self.individuals[8].name = "John Cafiero"
@@ -59,7 +59,7 @@ class TestUS25(unittest.TestCase):
             self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
-            output, "All children in the all families do not have the same names and birth dates.")
+            output, "All children in the all families do not have the same names and birth dates.\n")
         # put them back
         self.individuals[0].name = "Jennifer Cafiero"
         self.individuals[8].name = "John Cafiero"
@@ -72,7 +72,7 @@ class TestUS25(unittest.TestCase):
             self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
-            output, "All children in the all families do not have the same names and birth dates.")
+            output, "All children in the all families do not have the same names and birth dates.\n")
         # put things back
         self.individuals[0].birthday = "29 SEP 1996"
         self.individuals[8].birthday = "16 APR 1968"
@@ -85,7 +85,7 @@ class TestUS25(unittest.TestCase):
             self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(
-            output, "All children in the all families do not have the same names and birth dates.")
+            output, "All children in the all families do not have the same names and birth dates.\n")
         # put things back
         individuals, families = parse("../testfiles/US22_test.ged")
         self.individuals = individuals

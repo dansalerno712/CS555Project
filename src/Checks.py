@@ -189,7 +189,7 @@ def unique_first_names(individuals, families):
     output = ""
     for family in families:
         if family.children == []:
-            break
+            continue
         else:
             children = {}
             for child in family.children:
@@ -208,7 +208,7 @@ def unique_first_names(individuals, families):
                     output += "Error: " + str(family) + " has children, ".join(
                         children[key][1]) + ", with the same first name and birthday.\n"
     if flag:
-        output += "All children in the all families do not have the same names and birth dates."
+        output += "All children in the all families do not have the same names and birth dates.\n"
     return (flag, output)
 
 
@@ -592,6 +592,7 @@ def list_recent_deaths(individuals):
 
     return (flag, output)
 
+
 def siblings_should_not_marry(individuals, families):
     """US 18: Siblings Should Not Marry
 
@@ -610,10 +611,12 @@ def siblings_should_not_marry(individuals, families):
         wife = [indi for indi in individuals if indi.ID == family.wife_ID]
         if not set(husband[0].child).isdisjoint(wife[0].child):
             flag = False
-            output += "Error: " + str(husband[0].ID) + " and " + str(wife[0].ID) + " are siblings and should not marry.\n"
+            output += "Error: " + str(husband[0].ID) + " and " + str(
+                wife[0].ID) + " are siblings and should not marry.\n"
     if flag:
         output = "No siblings are married\n"
     return (flag, output)
+
 
 def list_upcoming_anniversaries(individuals, families):
     """US 39: List upcoming anniversaries
@@ -633,23 +636,26 @@ def list_upcoming_anniversaries(individuals, families):
         husband = [indi for indi in individuals if indi.ID == family.husband_ID]
         wife = [indi for indi in individuals if indi.ID == family.wife_ID]
         marriage = datetime.strptime(family.married, "%d %b %Y")
-        #puts marriage into the current year to calculate anniversary
-        marriage = marriage.replace(year = today.year)
+        # puts marriage into the current year to calculate anniversary
+        marriage = marriage.replace(year=today.year)
         delta = marriage - today
         if husband[0].alive and wife[0].alive and delta.days <= 30 and delta.days >= 0:
             flag = False
-            output += "Note: " + str(family.ID) + " has an upcoming anniversary on " + str(family.married) + "\n"
+            output += "Note: " + \
+                str(family.ID) + " has an upcoming anniversary on " + \
+                str(family.married) + "\n"
     if flag:
         output = "No living couples have anniversaries in the next 30 days.\n"
     return (flag, output)
 
+
 def list_living_married(individuals, families):
     """US 30: List living married
-        
+
         Args:
         individuals (list): A list of inidividuals
         families (list): A list of families
-        
+
         Returns:
         tuple: Tuple of the form (bool, output). Bool is True if there are no living married couples,
         False otherwise. Output is a string that describes the living married couples.
@@ -661,18 +667,20 @@ def list_living_married(individuals, families):
         wife = [indi for indi in individuals if indi.ID == family.wife_ID]
         if husband != [] and wife != [] and husband[0].alive and wife[0].alive:
             flag = False
-            output += "Husband: " + str(husband[0].ID) + ", Wife: " + str(wife[0].ID) + "\n"
+            output += "Husband: " + \
+                str(husband[0].ID) + ", Wife: " + str(wife[0].ID) + "\n"
     if flag:
         output = "No living married couples.\n"
     return (flag, output)
 
+
 def unique_name_birth(individuals, families):
     """US 23: Unique name and birth date
-        
+
         Args:
         individuals (list): A list of inidividuals
         families (list): A list of families
-        
+
         Returns:
         tuple: Tuple of the form (bool, output). Bool is True if all names and birth dates are unique.
         False otherwise. Output is a string that lists all individuals with non-unique names and birth dates.
@@ -685,9 +693,9 @@ def unique_name_birth(individuals, families):
         birthday = individual.birthday
         if (name, birthday) in everyone:
             flag = False
-            everyone[(name,birthday)] += [individual.ID]
+            everyone[(name, birthday)] += [individual.ID]
         else:
-            everyone[(name,birthday)] = [individual.ID]
+            everyone[(name, birthday)] = [individual.ID]
     if flag:
         output = "All unique names and birth dates.\n"
     else:
@@ -697,13 +705,14 @@ def unique_name_birth(individuals, families):
                 output += same + " have the same name and birth date.\n"
     return (flag, output)
 
+
 def aunts_and_uncles(individuals, families):
-    """US 20: Aunts and uncles 
-        
+    """US 20: Aunts and uncles
+
         Args:
         individuals (list): A list of inidividuals
         families (list): A list of families
-        
+
         Returns:
         tuple: Tuple of the form (bool, output). Bool is True if No aunts or uncles are married to nieces or nephews.
         False otherwise. Output is a string that lists all individuals who are married to a niece or nephew.
@@ -712,7 +721,7 @@ def aunts_and_uncles(individuals, families):
     output = ""
 
     for i in individuals:
-        parent_siblings =  get_siblings(i, individuals, families)
+        parent_siblings = get_siblings(i, individuals, families)
         children = get_children(i, individuals, families)
         for c in children:
             kid_spouses = get_spouses(c, individuals, families)
@@ -720,18 +729,20 @@ def aunts_and_uncles(individuals, families):
             if(len(creeps) > 0):
                 for cr in creeps:
                     flag = False
-                    output+=  "Error: " + str(cr) + " is married to their niece or nephew.\n"
+                    output += "Error: " + \
+                        str(cr) + " is married to their niece or nephew.\n"
     if flag:
         output += "No aunts or uncles are married to nieces or nephews.\n"
     return (flag, output)
 
+
 def living_single(individuals):
-    """US 31: Living single 
-        
+    """US 31: Living single
+
         Args:
         individuals (list): A list of inidividuals
         families (list): A list of families
-        
+
         Returns:
         tuple: Tuple of the form (bool, output). Bool is True if No one is single and over 30.
         False otherwise. Output is a string that lists all individuals who single and over 30.
@@ -741,7 +752,7 @@ def living_single(individuals):
     for i in individuals:
         if(i.age > 30 and len(i.spouse) == 0):
             flag = False
-            output+=   str(i) + " is single and over 30.\n"
+            output += str(i) + " is single and over 30.\n"
     if flag:
         output += "No one is single and over 30.\n"
     return (flag, output)

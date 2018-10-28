@@ -46,6 +46,7 @@ def main():
     print("User Story 25: Unique First Names in Families")
     result, output = Checks.unique_first_names(individuals, families)
     print(output)
+
     print("User Story 07: Less than 150 years old")
     result, output = Checks.age_less_than_150(individuals)
     print(output)
@@ -77,6 +78,7 @@ def main():
     print("User Story 02: Birth before Marriage")
     result, output = Checks.birth_before_marriage(individuals, families)
     print(output)
+
     print("User Story 24: Unique family by spouses")
     result, output = Checks.unique_family_by_spouses(families)
     print(output)
@@ -116,5 +118,7 @@ def main():
     print("User Story 31: Living Single")
     result, output = Checks.living_single(individuals)
     print(output)
+
+
 if __name__ == '__main__':
     main()
