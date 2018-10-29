@@ -17,7 +17,7 @@ class TestUS38(unittest.TestCase):
     # setup gets run before tests, so I use it to parse my test file and get the
     # data structures I need
     def setUp(self):
-        individuals, families = parse("../testfiles/US35_test.ged")
+        individuals, families = parse("../testfiles/US38_test.ged")
         self.individuals = individuals
 
     def test_one_upcoming_birthday(self):
@@ -31,7 +31,7 @@ class TestUS38(unittest.TestCase):
         self.assertEqual(output, str(
             self.individuals[0]) + " has a birthday in the next 30 days\n")
         # put stuff back
-        self.individuals[1].birthday = "25 NOV 2000"
+        self.individuals[0].birthday = "25 NOV 2000"
 
     def test_no_upcoming_birthdays(self):
         # set the birthday to 10 days in the past
@@ -45,7 +45,7 @@ class TestUS38(unittest.TestCase):
         self.assertEqual(
             output, "No individuals have birthdays in the next 30 days\n")
         # put back
-        self.individuals[1].birthday = "25 NOV 2000"
+        self.individuals[0].birthday = "25 NOV 2000"
 
     def test_empty_input(self):
         flag, output = Checks.list_upcoming_birthdays([])

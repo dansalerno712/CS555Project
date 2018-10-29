@@ -790,3 +790,37 @@ def list_upcoming_birthdays(individuals):
         output = "No individuals have birthdays in the next 30 days\n"
 
     return (flag, output)
+
+
+def correct_gender_for_role(individuals, families):
+    """US 38
+
+    Args:
+        individuals (list): A list of individuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if all roles have the correct gender in
+        every family, False otherwise. Output is a string that describes any families with incorrect roles.
+    """
+    flag = True
+    output = ""
+
+    for fam in families:
+        husband = next(
+            (indi for indi in individuals if indi.ID == fam.husband_ID), False)
+        wife = next(
+            (indi for indi in individuals if indi.ID == fam.wife_ID), False)
+
+        if husband and wife:
+            if husband.gender != "M":
+                flag = False
+                output += str(husband) + " is a husband but not a male\n"
+            if wife.gender != "F":
+                flag = False
+                output += str(wife) + " is a wife but not a female\n"
+
+    if flag:
+        output = "All families have the correct gender for their roles\n"
+
+    return(flag, output)
