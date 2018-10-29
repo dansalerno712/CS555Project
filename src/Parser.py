@@ -33,6 +33,16 @@ def parse(path):
         elif tag == "FAM":
             indexes.append((i, "FAM"))
 
+    # make sure to also get stuff if there is only one object
+    if len(indexes) == 1:
+        index, tag = indexes[0]
+
+        if tag == "INDI":
+            individuals_data.append(lines[index:])
+
+        if tag == "FAM":
+            families_data.append(lines[index:])
+
     # grab the lines that correspond to the INDIs and FAMs
     for i in range(len(indexes) - 1):
         index, tag = indexes[i]

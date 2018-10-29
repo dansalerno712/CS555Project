@@ -756,3 +756,37 @@ def living_single(individuals):
     if flag:
         output += "No one is single and over 30.\n"
     return (flag, output)
+
+
+def list_upcoming_birthdays(individuals):
+    """US 38: List upcoming birthdays
+
+    Args:
+        individuals (list): A list of inidividuals
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if nobody has upcoming birthdays in the next
+        30 days, False otherwise. Output is a string that describes which individuals have birthdays
+        in the next 30 days
+    """
+    flag = True
+    output = ""
+    # todays datetime
+    today = datetime.now()
+    for indi in individuals:
+        # parse birthday into datetime and set year to current year so we can compare days only
+        born = datetime.strptime(
+            indi.birthday, "%d %b %Y").replace(year=today.year)
+
+        # get difference
+        delta = born - today
+
+        # also need to make sure the birthday is in the past
+        if delta.days <= 30 and delta.days >= 0:
+            flag = False
+            output += str(indi) + " has a birthday in the next 30 days\n"
+
+    if flag:
+        output = "No individuals have birthdays in the next 30 days\n"
+
+    return (flag, output)
