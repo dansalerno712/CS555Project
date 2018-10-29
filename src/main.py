@@ -123,6 +123,10 @@ def main():
     result, output = Checks.list_upcoming_birthdays(individuals)
     print(output)
 
+    print("User Story 21: Correct Gender for Role")
+    result, output = Checks.correct_gender_for_role(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
