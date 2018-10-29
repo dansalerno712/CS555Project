@@ -119,6 +119,10 @@ def main():
     result, output = Checks.living_single(individuals)
     print(output)
 
+    print("User Story 38: List Upcoming Birthdays")
+    result, output = Checks.list_upcoming_birthdays(individuals)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
