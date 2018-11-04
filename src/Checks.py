@@ -824,3 +824,34 @@ def correct_gender_for_role(individuals, families):
         output = "All families have the correct gender for their roles\n"
 
     return(flag, output)
+
+def marriage_before_death(individuals, families):
+    """US 05
+
+    Args:
+        individuals (list): A list of individuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if all marriages happen before death of
+        each spouse, False otherwise. Output is a string that describes any marriages that occur after death.
+    """
+    flag = True
+    output = ""
+    for family in families:
+        for individual in individuals:
+            if (family.husband_ID == individual.ID or family.wife_ID == individual.ID) and not individual.alive:
+                marriage_date = datetime.strptime(family.married, "%d %b %Y")
+                death_date = datetime.strptime(individual.death, "%d %b %Y")
+                if marriage_date > death_date:
+                    flag = False
+                    output += "Error: " + individual.ID + " was married in family " + family.ID + " after death.\n"
+    if flag:
+        output += "All individuals were married before death.\n"
+    return (flag, output)
+
+
+
+
+
+

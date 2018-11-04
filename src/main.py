@@ -127,6 +127,10 @@ def main():
     result, output = Checks.correct_gender_for_role(individuals, families)
     print(output)
 
+    print("User Story 05: Marriage Before Death")
+    result, output = Checks.marriage_before_death(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
