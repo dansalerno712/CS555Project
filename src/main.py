@@ -131,6 +131,10 @@ def main():
     result, output = Checks.marriage_before_death(individuals, families)
     print(output)
 
+    print("User Story 06: Divorce Before Death")
+    result, output = Checks.divorce_before_death(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()

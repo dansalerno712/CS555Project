@@ -850,8 +850,27 @@ def marriage_before_death(individuals, families):
         output += "All individuals were married before death.\n"
     return (flag, output)
 
+def divorce_before_death(individuals, families):
+    """US 06
 
+    Args:
+        individuals (list): A list of individuals
+        families (list): A list of families
 
-
-
-
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if all divorces happen before death of
+        each spouse, False otherwise. Output is a string that describes any divorces that occur after death.
+    """
+    flag = True
+    output = ""
+    for family in families:
+        for individual in individuals:
+            if (family.husband_ID == individual.ID or family.wife_ID == individual.ID) and not individual.alive and family.divorced != None:
+                divorce_date = datetime.strptime(family.divorced, "%d %b %Y")
+                death_date = datetime.strptime(individual.death, "%d %b %Y")
+                if divorce_date > death_date:
+                    flag = False
+                    output += "Error: " + individual.ID + " was divorced in family " + family.ID + " after death.\n"
+    if flag:
+        output += "All individuals were divorced before death.\n"
+    return (flag, output)
