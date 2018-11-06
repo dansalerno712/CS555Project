@@ -903,3 +903,41 @@ def order_siblings_by_age(individuals, families):
     if flag:
         output = "No siblings to print.\n"
     return (flag, output)
+
+def parents_too_old(individuals, families):
+    """US 12: Parents too old
+
+    Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if no parents are too old
+        False otherwise. Output is a string that lists parents that are too old.
+    """
+    flag = True
+    output = ""
+    for fam in families:
+        husband = next(
+            (indi for indi in individuals if indi.ID == fam.husband_ID), False)
+        wife = next(
+            (indi for indi in individuals if indi.ID == fam.wife_ID), False)
+        if (husband and wife):
+            husband_born = datetime.strptime(husband.birthday, "%d %b %Y")
+            wife_born = datetime.strptime(wife.birthday, "%d %b %Y")
+            for child in fam.children:
+                c = next((indi for indi in individuals if indi.ID == child), False)
+                if c:
+                    child_born = datetime.strptime(c.birthday, "%d %b %Y")
+                    dad_delta = relativedelta(child_born, husband_born)
+                    if dad_delta.years >= 80:
+                        flag = False
+                        output += "Error: Father " + str(husband.ID) + " is too old for child " + str(c.ID) + "\n"
+                    mom_delta = relativedelta(child_born, wife_born)
+                    if mom_delta.years >= 60:
+                        flag = False
+                        output += "Error: Mother " + str(wife.ID) + " is too old for child " + str(c.ID) + "\n"
+
+    if flag:
+        output = "No parents are too old for their children.\n"
+    return (flag, output)
