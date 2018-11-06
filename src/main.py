@@ -139,6 +139,10 @@ def main():
     result, output = Checks.order_siblings_by_age(individuals, families)
     print(output)
 
+    print("User Story 12: Parents too old")
+    result, output = Checks.parents_too_old(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
