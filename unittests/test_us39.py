@@ -8,7 +8,7 @@ sys.path.append("../src")
 from Parser import parse
 import Checks
 import Utils
-
+import datetime
 
 class TestUS39(unittest.TestCase):
     # make sure to name the class Test<US#>
@@ -26,10 +26,13 @@ class TestUS39(unittest.TestCase):
         result, output = Checks.list_upcoming_anniversaries(self.individuals, self.families)
         self.assertEqual(result, True)
         self.assertEqual(output, "No living couples have anniversaries in the next 30 days.\n")
-        
+
 
     def test_one_upcoming_anniversary(self):
-        self.families[0].married = "31 OCT 2018"
+        today = datetime.datetime.now()
+        upcoming_anniversary = datetime.datetime(
+            2018, today.month, today.day) + datetime.timedelta(days=10)
+        self.families[0].married = upcoming_anniversary.strftime("%d %b %Y")
         self.families[0].divorced = "None"
         result, output = Checks.list_upcoming_anniversaries(self.individuals, self.families)
         self.assertEqual(result, False)
@@ -40,7 +43,10 @@ class TestUS39(unittest.TestCase):
         self.families[0].divorced = "3 MAR 1967"
 
     def test_one_upcoming_anniversary_different_year(self):
-        self.families[0].married = "31 OCT 2016"
+        today = datetime.datetime.now()
+        upcoming_anniversary = datetime.datetime(
+            2000, today.month, today.day) + datetime.timedelta(days=10)
+        self.families[0].married = upcoming_anniversary.strftime("%d %b %Y")
         self.families[0].divorced = "None"
         result, output = Checks.list_upcoming_anniversaries(self.individuals, self.families)
         self.assertEqual(result, False)
@@ -56,7 +62,7 @@ class TestUS39(unittest.TestCase):
         self.assertEqual(output, "No living couples have anniversaries in the next 30 days.\n")
         individuals, families = parse("../testfiles/US39_test.ged")
         self.families = families
-    
+
 
 if __name__ == '__main__':
     unittest.main()

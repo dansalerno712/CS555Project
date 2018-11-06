@@ -874,3 +874,32 @@ def divorce_before_death(individuals, families):
     if flag:
         output += "All individuals were divorced before death.\n"
     return (flag, output)
+
+def order_siblings_by_age(individuals, families):
+    """US 28: Order siblings by age
+
+    Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if there are no siblings to sort by age
+        False otherwise. Output is a string that lists siblings sorted by age.
+    """
+    flag = True
+    output = ""
+    for family in families:
+        sibling_IDs = family.children
+        siblings = []
+        for ID in sibling_IDs:
+            siblings.append(next((indi for indi in individuals if indi.ID == ID), False))
+        siblings.sort(key=lambda x : x.age, reverse=True)
+        # sort sibilings
+        output += "Printing family: " + str(family.ID) + "\n"
+        for sib in siblings:
+            if sib:
+                flag = False
+                output += str(sib) + " \n"
+    if flag:
+        output = "No siblings to print.\n"
+    return (flag, output)

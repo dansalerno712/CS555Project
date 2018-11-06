@@ -135,6 +135,10 @@ def main():
     result, output = Checks.divorce_before_death(individuals, families)
     print(output)
 
+    print("User Story 28: Order siblings by age")
+    result, output = Checks.order_siblings_by_age(individuals, families)
+    print(output)
+
 
 if __name__ == '__main__':
     main()
