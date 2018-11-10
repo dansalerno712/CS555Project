@@ -941,3 +941,32 @@ def parents_too_old(individuals, families):
     if flag:
         output = "No parents are too old for their children.\n"
     return (flag, output)
+
+
+
+def list_orphans(individuals, families):
+    """US 33: Lists orphans
+
+    Args:
+        individuals (list): A list of inidividuals
+        families (list): A list of families
+
+    Returns:
+        tuple: Tuple of the form (bool, output). Bool is True if no orphans (younger than 18 and both parents dead)
+        False otherwise. Output is a string that lists orphans.
+    """
+    flag = True
+    output = ""
+    for fam in families:
+        husband = next((indi for indi in individuals if indi.ID == fam.husband_ID), False)
+        wife = next((indi for indi in individuals if indi.ID == fam.wife_ID), False)
+        if not wife.alive and not husband.alive:
+            kids = get_children(husband, individuals, families)
+            if len(kids) != 0:
+                for k in kids:
+                    if k.age < 18:
+                        flag = False
+                        output += str(k) + "\n"
+    if flag:
+        output = "No orphans found.\n"
+    return (flag, output)

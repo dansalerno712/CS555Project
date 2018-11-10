@@ -143,6 +143,11 @@ def main():
     result, output = Checks.parents_too_old(individuals, families)
     print(output)
 
+    print("User Story 33: List orphans")
+    result, output = Checks.list_orphans(individuals, families)
+    print(output)
+    
+
 
 if __name__ == '__main__':
     main()
