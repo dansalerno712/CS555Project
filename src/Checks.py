@@ -141,9 +141,9 @@ def birth_before_parents_death(individuals, families):
     """
     flag = True
     output = ""
-    mom_death = None
-    dad_death = None
     for family in families:
+        mom_death = None
+        dad_death = None
         children = {}
         for individual in individuals:
             if individual.ID == family.wife_ID:

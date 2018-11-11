@@ -67,22 +67,30 @@ def parse(path):
     families = []
 
     for data in individuals_data:
-        indi = Individual(data)
-        individuals.append(indi)
+        try:
+            indi = Individual(data)
+            individuals.append(indi)
+        except ValueError as e:
+            print(e)
+            print("Error Individual will not be parsed")
 
     for data in families_data:
-        fam = Family(data)
+        try:
+            fam = Family(data)
 
-        # get the husband and wife names which are linked from Individuals
-        husband = [man for man in individuals if man.ID == fam.husband_ID]
-        wife = [woman for woman in individuals if woman.ID == fam.wife_ID]
+            # get the husband and wife names which are linked from Individuals
+            husband = [man for man in individuals if man.ID == fam.husband_ID]
+            wife = [woman for woman in individuals if woman.ID == fam.wife_ID]
 
-        if len(wife) > 0:
-            fam.wife_name = wife[0].name
+            if len(wife) > 0:
+                fam.wife_name = wife[0].name
 
-        if len(husband) > 0:
-            fam.husband_name = husband[0].name
+            if len(husband) > 0:
+                fam.husband_name = husband[0].name
 
-        families.append(fam)
+            families.append(fam)
+        except ValueError as e:
+            print(e)
+            print("Error Family will not be parsed")
 
     return (individuals, families)
