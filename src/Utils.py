@@ -26,6 +26,22 @@ def is_valid(level, tag):
     else:
         return "N"
 
+def check_date(id, dates):
+    """Checks if date is legitimate
+    Args:
+        id (String): id of indi or fam
+        dates (List): list of dates
+
+    Throws: ValueError,  if illegitimate dates
+    """
+    for d in dates:
+        if d is None:
+            continue
+        try:
+            datetime.datetime.strptime(d, "%d %b %Y").date()
+        except ValueError as err:
+            raise ValueError("Illegitimate date: " + d + " for ID: " + id)
+
 
 def parse_line(line):
     """Takes a line of the gedcom file and returns the level, tag, and arguments

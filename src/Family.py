@@ -1,4 +1,4 @@
-from Utils import parse_line
+from Utils import parse_line, check_date
 
 
 class Family(object):
@@ -44,12 +44,17 @@ class Family(object):
                     # skip a line to get the actual date
                     level, tag, args, valid = parse_line(tag_list[i + 1])
                     self.married = args
+                    # check_date(self.married)
                 elif tag == "CHIL":
                     self.children.append(args)
                 elif tag == "DIV":
                     # skip a line to get the actual date
                     level, tag, args, valid = parse_line(tag_list[i + 1])
                     self.divorced = args
+
+        #check dates
+        dates = [self.married, self.divorced]
+        check_date(self.ID, dates)
 
     def __str__(self):
         return "{ID: " + str(self.ID) + \

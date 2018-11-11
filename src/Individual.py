@@ -1,4 +1,4 @@
-from Utils import parse_line, calculate_age
+from Utils import parse_line, calculate_age, check_date
 
 
 class Individual(object):
@@ -54,6 +54,10 @@ class Individual(object):
                     self.child.append(args)
                 elif tag == "FAMS":
                     self.spouse.append(args)
+
+        #check dates
+        dates = [self.birthday, self.death]
+        check_date(self.ID, dates)
 
         if hasattr(self, "birthday"):
             self.age = calculate_age(self.birthday)
