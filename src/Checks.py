@@ -825,6 +825,7 @@ def correct_gender_for_role(individuals, families):
 
     return(flag, output)
 
+
 def marriage_before_death(individuals, families):
     """US 05
 
@@ -845,10 +846,12 @@ def marriage_before_death(individuals, families):
                 death_date = datetime.strptime(individual.death, "%d %b %Y")
                 if marriage_date > death_date:
                     flag = False
-                    output += "Error: " + individual.ID + " was married in family " + family.ID + " after death.\n"
+                    output += "Error: " + individual.ID + \
+                        " was married in family " + family.ID + " after death.\n"
     if flag:
         output += "All individuals were married before death.\n"
     return (flag, output)
+
 
 def divorce_before_death(individuals, families):
     """US 06
@@ -870,10 +873,12 @@ def divorce_before_death(individuals, families):
                 death_date = datetime.strptime(individual.death, "%d %b %Y")
                 if divorce_date > death_date:
                     flag = False
-                    output += "Error: " + individual.ID + " was divorced in family " + family.ID + " after death.\n"
+                    output += "Error: " + individual.ID + \
+                        " was divorced in family " + family.ID + " after death.\n"
     if flag:
         output += "All individuals were divorced before death.\n"
     return (flag, output)
+
 
 def order_siblings_by_age(individuals, families):
     """US 28: Order siblings by age
@@ -892,8 +897,9 @@ def order_siblings_by_age(individuals, families):
         sibling_IDs = family.children
         siblings = []
         for ID in sibling_IDs:
-            siblings.append(next((indi for indi in individuals if indi.ID == ID), False))
-        siblings.sort(key=lambda x : x.age, reverse=True)
+            siblings.append(
+                next((indi for indi in individuals if indi.ID == ID), False))
+        siblings.sort(key=lambda x: x.age, reverse=True)
         # sort sibilings
         output += "Printing family: " + str(family.ID) + "\n"
         for sib in siblings:
@@ -903,6 +909,7 @@ def order_siblings_by_age(individuals, families):
     if flag:
         output = "No siblings to print.\n"
     return (flag, output)
+
 
 def parents_too_old(individuals, families):
     """US 12: Parents too old
@@ -932,16 +939,19 @@ def parents_too_old(individuals, families):
                     dad_delta = relativedelta(child_born, husband_born)
                     if dad_delta.years >= 80:
                         flag = False
-                        output += "Error: Father " + str(husband.ID) + " is too old for child " + str(c.ID) + "\n"
+                        output += "Error: Father " + \
+                            str(husband.ID) + " is too old for child " + \
+                            str(c.ID) + "\n"
                     mom_delta = relativedelta(child_born, wife_born)
                     if mom_delta.years >= 60:
                         flag = False
-                        output += "Error: Mother " + str(wife.ID) + " is too old for child " + str(c.ID) + "\n"
+                        output += "Error: Mother " + \
+                            str(wife.ID) + " is too old for child " + \
+                            str(c.ID) + "\n"
 
     if flag:
         output = "No parents are too old for their children.\n"
     return (flag, output)
-
 
 
 def list_orphans(individuals, families):
@@ -958,8 +968,10 @@ def list_orphans(individuals, families):
     flag = True
     output = ""
     for fam in families:
-        husband = next((indi for indi in individuals if indi.ID == fam.husband_ID), False)
-        wife = next((indi for indi in individuals if indi.ID == fam.wife_ID), False)
+        husband = next(
+            (indi for indi in individuals if indi.ID == fam.husband_ID), False)
+        wife = next(
+            (indi for indi in individuals if indi.ID == fam.wife_ID), False)
         if not wife.alive and not husband.alive:
             kids = get_children(husband, individuals, families)
             if len(kids) != 0:
