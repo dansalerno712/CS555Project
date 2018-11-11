@@ -45,9 +45,6 @@ class TestUS42(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.indi = Family(data)
     
-    def test_illegitimate_date_parse(self):
-        with self.assertRaises(ValueError):
-            individuals, families = parse("../testfiles/US42_test.ged")
 
 if __name__ == '__main__':
     unittest.main()
